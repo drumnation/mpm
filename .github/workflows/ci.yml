@@ -34,10 +34,6 @@ jobs:
       # Lint, test, and build the affected projects
       - run: pnpm exec nx affected -t lint test build
 
-      # Start the application server
-      - name: Start application server
-        run: pnpm start &
-
       # Install Playwright browsers
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
