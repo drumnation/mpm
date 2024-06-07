@@ -22,10 +22,6 @@ jobs:
         with:
           version: 8
 
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
-      # - run: pnpm dlx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
-
       # Cache node_modules
       - uses: actions/setup-node@v3
         with:
@@ -35,7 +31,17 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: pnpm exec nx-cloud record -- echo Hello World
+      # Lint, test, and build the affected projects
       - run: pnpm exec nx affected -t lint test build
-      - run: pnpm exec nx affected --parallel 1 -t e2e-ci
+
+      # Start the application server
+      - name: Start application server
+        run: pnpm start &
+
+      # Install Playwright browsers
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
+      # Run the Playwright tests using the e2e-ci target
+      - name: Run Playwright tests
+        run: pnpm exec nx affected --parallel 1 -t e2e-ci
