@@ -4,6 +4,43 @@
   "sourceRoot": "apps/mpm/src",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project mpm --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/apps/mpm",
+        "configFile": "apps/mpm/vite.config.ts"
+      },
+      "configurations": {
+        "production": {
+          "minify": true,
+          "sourcemap": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "buildTarget": "mpm:build",
+        "port": 4200
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/mpm/**/*.ts",
+          "apps/mpm/**/*.tsx",
+          "apps/mpm/**/*.js",
+          "apps/mpm/**/*.jsx"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vitest:test",
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
 }

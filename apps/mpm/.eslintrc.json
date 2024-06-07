@@ -1,6 +1,12 @@
 {
   "extends": ["plugin:@nx/react", "../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
+  "plugins": [
+    "eslint-plugin-react-compiler"
+  ],
+  "rules": {
+    "react-compiler/react-compiler": "error"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
