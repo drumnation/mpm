@@ -6,23 +6,6 @@
   "implicitDependencies": [
     "mpm"
   ],
-  "targets": {
-    "e2e": {
-      "executor": "@nx/playwright:test",
-      "options": {
-        "headless": true,
-        "watchForFileChanges": false,
-        "outputDir": "test-results/apps/mpm-e2e/playwright"
-      }
-    },
-    "e2e-ci": {
-      "executor": "@nx/playwright:test",
-      "options": {
-        "headless": true,
-        "watchForFileChanges": false,
-        "outputDir": "test-results/apps/mpm-e2e/playwright",
-        "ci": true
-      }
-    }
-  }
+  "// targets": "to see all targets run: nx show project mpm-e2e --web",
+  "targets": {}
 }
