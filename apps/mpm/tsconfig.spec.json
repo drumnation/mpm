@@ -11,6 +11,7 @@
       "@nx/react/typings/image.d.ts",
     ]
   },
+  "files": ["src/app/app.tsx", "src/app/nx-welcome.tsx"],
   "include": [
     "jest.config.ts",
     "src/**/*.test.ts",
