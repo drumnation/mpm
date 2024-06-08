@@ -7,5 +7,6 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../coverage/server',
+  detectOpenHandles: true,
   forceExit: true,
 };
