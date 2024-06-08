@@ -1,15 +1,15 @@
 {
-  "name": "mpm",
+  "name": "client",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/mpm/src",
+  "sourceRoot": "apps/client/src",
   "projectType": "application",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
       "options": {
-        "outputPath": "dist/apps/mpm",
-        "configFile": "apps/mpm/vite.config.ts"
+        "outputPath": "dist/apps/client",
+        "configFile": "apps/client/vite.config.ts"
       },
       "configurations": {
         "production": {
@@ -21,7 +21,7 @@
     "serve": {
       "executor": "@nx/vite:dev-server",
       "options": {
-        "buildTarget": "mpm:build",
+        "buildTarget": "client:build",
         "port": 4200
       }
     },
@@ -29,10 +29,10 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/mpm/**/*.ts",
-          "apps/mpm/**/*.tsx",
-          "apps/mpm/**/*.js",
-          "apps/mpm/**/*.jsx"
+          "apps/client/**/*.ts",
+          "apps/client/**/*.tsx",
+          "apps/client/**/*.js",
+          "apps/client/**/*.jsx"
         ]
       }
     },

@@ -9,10 +9,6 @@
     "lint": "nx lint mpm"
   },
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "dependencies": {
     "@types/express": "^4.17.21",
     "axios": "^1.6.0",

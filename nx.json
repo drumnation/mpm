@@ -1,7 +1,10 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -43,9 +46,8 @@
         "targetName": "test"
       },
       "exclude": [
-        "apps/express-api-e2e/**/*",
-        "apps/server-e2e/**/*",
-        "server-e2e/**/*"
+        "apps/client-e2e/**/*",
+        "apps/server-e2e/**/*"
       ]
     },
     {

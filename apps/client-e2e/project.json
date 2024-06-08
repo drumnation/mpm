@@ -1,10 +1,10 @@
 {
-  "name": "mpm-e2e",
+  "name": "client-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/mpm-e2e/src",
+  "sourceRoot": "apps/client-e2e/src",
   "implicitDependencies": [
-    "mpm"
+    "client"
   ],
   "// targets": "to see all targets run: nx show project mpm-e2e --web",
   "targets": {}
