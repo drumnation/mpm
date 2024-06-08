@@ -7,12 +7,22 @@
   ],
   "targets": {
     "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run server:serve:production",
+          "nx run server-e2e:e2e-tests"
+        ],
+        "parallel": true
+      }
+    },
+    "e2e-tests": {
       "executor": "@nx/jest:jest",
       "outputs": [
         "{workspaceRoot}/coverage/{e2eProjectRoot}"
       ],
       "options": {
-        "jestConfig": "server-e2e/jest.config.ts",
+        "jestConfig": "apps/server-e2e/jest.config.ts",
         "passWithNoTests": true
       },
       "dependsOn": [

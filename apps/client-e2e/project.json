@@ -6,6 +6,6 @@
   "implicitDependencies": [
     "client"
   ],
-  "// targets": "to see all targets run: nx show project mpm-e2e --web",
+  "// targets": "to see all targets run: nx show project client-e2e --web",
   "targets": {}
 }

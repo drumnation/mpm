@@ -10,9 +10,15 @@ const StyledApp = styled.div`
 
 export const App: FC = () => {
   return (
-    <StyledApp>
-      <Player />
-    </StyledApp>
+    <>
+      <h1>
+        <span> Hello there, </span>
+        Welcome 👋
+      </h1>
+      <StyledApp>
+        <Player />
+      </StyledApp>
+    </>
   );
 }
 
