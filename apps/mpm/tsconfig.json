@@ -6,7 +6,6 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["vite/client", "react/experimental", "react-dom/experimental"],
     "baseUrl": ".",
     "paths": {
       "@mpm/*": ["src/*"]
