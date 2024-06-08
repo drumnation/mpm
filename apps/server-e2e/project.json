@@ -6,7 +6,7 @@
     "server"
   ],
   "targets": {
-    "e2e": {
+    "e2e-ci": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
