@@ -20,28 +20,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'pnpm'
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Set SHAs for Nx
-        uses: nrwl/nx-set-shas@v4
+        run: echo "NX_BASE=${{ github.event.before }}" >> $GITHUB_ENV
+            echo "NX_HEAD=${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Lint, test, and build the affected projects
-        run: pnpm exec nx affected -t lint test build
+        run: pnpm exec nx affected -t lint test build --base=$NX_BASE --head=$NX_HEAD
+
+      - name: Start server
+        run: pnpm exec nx serve server --configuration=production &
+        env:
+          NODE_ENV: production
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:3000
+
+      - name: Run e2e tests for server
+        run: pnpm exec nx run server-e2e:e2e
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: pnpm exec nx affected --parallel 1 -t e2e-ci
+      - name: Run Playwright tests for mpm-e2e
+        run: pnpm exec nx run mpm-e2e:e2e --configuration=ci
