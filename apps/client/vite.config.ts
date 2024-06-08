@@ -7,7 +7,7 @@ const ReactCompilerConfig = { /* ... */ };
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/apps/mpm',
+  cacheDir: '../../node_modules/.vite/apps/client',
 
   server: {
     port: 4200,
@@ -28,7 +28,7 @@ export default defineConfig({
   }), nxViteTsPaths()],
 
   build: {
-    outDir: '../../dist/apps/mpm',
+    outDir: '../../dist/apps/client',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
