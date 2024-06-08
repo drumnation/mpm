@@ -11,7 +11,9 @@
       "options": {
         "commands": [
           "nx run server:serve:production",
-          "nx run server-e2e:e2e-tests"
+          "pnpm exec wait-on http://localhost:3333 &",
+          "nx run server-e2e:e2e-tests",
+          "sleep 2 && pnpm exec kill-port 3333"
         ],
         "parallel": true
       }
@@ -24,10 +26,7 @@
       "options": {
         "jestConfig": "apps/server-e2e/jest.config.ts",
         "passWithNoTests": true
-      },
-      "dependsOn": [
-        "server:build"
-      ]
+      }
     }
   },
   "lint": {
