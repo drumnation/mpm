@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve mpm",
-    "build": "nx build mpm",
-    "test": "nx test mpm",
-    "lint": "nx lint mpm"
+    "start": "nx serve client",
+    "build": "nx build client",
+    "test": "nx test client",
+    "lint": "nx lint client"
   },
   "private": true,
   "dependencies": {
