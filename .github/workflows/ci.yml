@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 permissions:
   actions: read
@@ -18,26 +20,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      # Cache node_modules
-      - uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
-      - uses: nrwl/nx-set-shas@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
-      # Lint, test, and build the affected projects
-      - run: pnpm exec nx affected -t lint test build
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      # Install Playwright browsers
+      - name: Set SHAs for Nx
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Lint, test, and build the affected projects
+        run: pnpm exec nx affected -t lint test build
+
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
-      # Run the Playwright tests using the e2e-ci target
       - name: Run Playwright tests
         run: pnpm exec nx affected --parallel 1 -t e2e-ci
