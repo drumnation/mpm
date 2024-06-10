@@ -94,7 +94,6 @@ const usePlayer = () => {
     const handleReady = () => {
       if (trackFilename && !commentsSeededRef.current) {
         const comments = mockComments[trackFilename] || [];
-        console.debug('comments', comments);
         handleSeedComments(comments);
         commentsSeededRef.current = true;
       }

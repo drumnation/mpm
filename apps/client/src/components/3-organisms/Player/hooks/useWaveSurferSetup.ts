@@ -30,7 +30,6 @@ export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
   });
 
   const handleSeek = useCallback((time: number) => {
-    console.debug("time", time);
     if (wavesurfer) {
       if (time === 0) {
         wavesurfer.seekTo(0);
@@ -39,13 +38,11 @@ export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
       }
     }
   }, [wavesurfer, state.duration]);
-  console.debug('state.seekTime', state.seekTime);
 
   useEffect(() => {
-    console.debug("seekTime", state.seekTime);
     if (state.seekTime !== null) {
       handleSeek(state.seekTime);
-      dispatch({ type: 'SET_SEEK_TIME', payload: null }); // Reset seekTime after seeking
+      dispatch({ type: 'SET_SEEK_TIME', payload: null });
     }
   }, [state.seekTime, handleSeek, dispatch]);
 

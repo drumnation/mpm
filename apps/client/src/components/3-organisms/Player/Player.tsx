@@ -22,7 +22,7 @@ const Player: React.FC = () => {
     wavesurfer,
     wavesurferRef
   } = usePlayer();
-  console.log('filename', filename)
+
   return (
     <Box style={{ display: 'flex', flexDirection: 'column', gap: '20px', height: '100%' }}>
       {trackName && <Text style={{ fontSize: 24, display: 'flex', alignItems: 'center' }}>{trackName} <Badge ml='xs'>{genre}</Badge></Text>}

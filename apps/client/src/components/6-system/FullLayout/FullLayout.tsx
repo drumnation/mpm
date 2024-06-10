@@ -1,11 +1,11 @@
-import { AppShell, Burger, Group, Button } from '@mantine/core';
+import { AppShell, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import React, { FC, ReactNode, useState } from 'react';
+import { IconCircleCaretLeft, IconCircleCaretRight } from '@tabler/icons-react';
+import { FC, ReactNode, useState } from 'react';
 import { ResizableBox } from 'react-resizable';
-import styled from 'styled-components';
 import 'react-resizable/css/styles.css';
+import styled from 'styled-components';
 import { useMiddleArea } from '../../../contexts';
-import { IconCaretLeft, IconCaretRight, IconCircleCaretLeft, IconCircleCaretRight, IconMinimize } from '@tabler/icons-react';
 
 interface FullLayoutProps {
   header: ReactNode;
@@ -17,14 +17,14 @@ interface FullLayoutProps {
 
 const ResizableContainer = styled.div`
   display: flex;
-  height: 100vh; /* Ensuring full height to the footer */
+  height: 100vh;
   overflow: hidden;
 `;
 
 const ResizableBoxStyled = styled(ResizableBox)`
   position: relative;
   height: 100%;
-  border: 1px solid #ccc; /* Adding border for visibility */
+  border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
 `;
@@ -34,7 +34,7 @@ const CustomHandle = styled.span`
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: #ccc; /* Adding color to the handle for visibility */
+  background-color: #ccc;
   cursor: ew-resize;
   z-index: 1;
 `;
@@ -64,7 +64,7 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
       footer={{ height: 60 }}
       padding="md"
       styles={{
-        main: { height: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column' }, // Ensuring the main content takes full height
+        main: { height: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column' },
       }}
     >
       <AppShell.Header>
@@ -84,12 +84,12 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
           handle={<CustomHandleNavbar />}
         >
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: 5, marginTop: 60 }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: 5, marginTop: 62 }}>
               {isNavbarMinimized ?
                 <IconCircleCaretRight onClick={() => setNavbarMinimized(!isNavbarMinimized)} />
                 : <IconCircleCaretLeft onClick={() => setNavbarMinimized(!isNavbarMinimized)} />}
             </div>
-            <div style={{ overflowY: 'auto', flexGrow: 1 }}> {/* Allowing the inner content to scroll */}
+            <div style={{ overflowY: 'auto', flexGrow: 1 }}>
               {!isNavbarMinimized && navbar}
             </div>
           </div>
@@ -113,7 +113,7 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
           resizeHandles={['w']}
         >
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ marginTop: 60, display: 'flex', justifyContent: 'flex-end', marginRight: 5 }}>
+            <div style={{ marginTop: 62, display: 'flex', justifyContent: 'flex-start', marginLeft: 5 }}>
               {isAsideMinimized ?
                 <IconCircleCaretLeft onClick={() => setAsideMinimized(!isAsideMinimized)} />
                 : <IconCircleCaretRight onClick={() => setAsideMinimized(!isAsideMinimized)} />}
