@@ -10,18 +10,39 @@ export const useBPMAnalysis = (wavesurfer: WaveSurfer | null) => {
   const [playbackRate, setPlaybackRate] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // @ts-expect-error - can't figure out how to type this
+  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
 
+  const initializeAudioContext = useCallback(() => {
+    const context = new AudioContext();
+    setAudioContext(context);
+  }, []);
+
+  // @ts-expect-error - Not sure how to fix
   const analyzeBPM = useCallback(async () => {
+    if (!state.selectedTrack?.filename) {
+      console.error('No file selected');
+      return;
+    }
+
+    if (!audioContext) {
+      console.error('AudioContext not initialized');
+      return;
+    }
+
     setLoading(true);
     try {
-      const file = state.selectedTrack?.filename ?? '';
-      const audioContext = new AudioContext();
+      const file = state.selectedTrack.filename;
       const response = await fetch(file);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch the file: ${response.statusText}`);
+      }
+
       const arrayBuffer = await response.arrayBuffer();
       const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
       const tempo = await analyze(audioBuffer);
       const calculatedBpm = Math.round(tempo);
+
       setOriginalBpm(calculatedBpm);
       setRelativeBpm(calculatedBpm);
       setPlaybackRate(1);
@@ -30,11 +51,19 @@ export const useBPMAnalysis = (wavesurfer: WaveSurfer | null) => {
     } finally {
       setLoading(false);
     }
-  }, [state.selectedTrack]);
+  }, [state.selectedTrack, audioContext]);
 
   useEffect(() => {
-    analyzeBPM();
-  }, [analyzeBPM]);
+    if (state.selectedTrack?.filename && !audioContext) {
+      initializeAudioContext();
+    }
+  }, [state.selectedTrack, audioContext, initializeAudioContext]);
+
+  useEffect(() => {
+    if (state.selectedTrack?.filename && audioContext) {
+      analyzeBPM();
+    }
+  }, [state.selectedTrack, audioContext, analyzeBPM]);
 
   useEffect(() => {
     if (wavesurfer) {

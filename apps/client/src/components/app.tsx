@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { createTheme, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
@@ -20,7 +20,7 @@ const App: FC = () => {
       <Router>
         <StyledApp>
           <Routes>
-            <Route path="/" element={<h1>Welcome 👋</h1>} />
+            <Route path="/" element={<h1>Welcome 👋 <a href='/music-review-dashboard'>continue to dashboard demo</a></h1>} />
             <Route path="/music-review-dashboard" element={<MusicReviewDashboard />} />
             {/* <Route path="/dashboard1" element={<Dashboard1 />} />
             <Route path="/dashboard2" element={<Dashboard2 />} /> */}
@@ -31,4 +31,4 @@ const App: FC = () => {
   );
 }
 
-export default App;
+export default memo(App);

@@ -1,6 +1,6 @@
-import { TrackMetadata } from '@mpm/components/5-pages/MusicReviewDashboard/DummyMusicData';
+import { TrackMetadata } from '@mpm/library/DummyMusicData';
 import { Header } from '@tanstack/react-table';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 interface DraggableHeaderProps {
@@ -47,4 +47,4 @@ const DraggableHeader: FC<DraggableHeaderProps> = ({ column, index, moveColumn, 
   );
 };
 
-export default DraggableHeader;
+export default memo(DraggableHeader);

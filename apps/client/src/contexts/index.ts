@@ -1,2 +1,2 @@
-export * from './TrackContext';
-export * from './MiddleAreaContext'
+export * from './TrackContext/TrackContext';
+export * from './WavesurferContext/WavesurferContext'

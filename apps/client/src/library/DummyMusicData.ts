@@ -1,5 +1,4 @@
 import OpenAI from 'openai';
-import { ChatCompletionMessage } from 'openai/resources/index.mjs';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface TrackMetadata {
@@ -316,8 +315,8 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "1db0327e-19e3-44ef-82cd-5841991cb5fb",
-      "timeStart": 21,
-      "timeEnd": 31,
+      "timeStart": 29,
+      "timeEnd": 39,
       "text": "Please increase the dynamic range and add more variety in instrumentation to keep the listener engaged throughout the duration of the track. Consider incorporating more melodic elements to enhance the overall feel of the piece.",
       "label": "B"
     },
@@ -330,15 +329,15 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "800b9838-a82a-4035-8fa9-7325671950b1",
-      "timeStart": 49,
-      "timeEnd": 59,
+      "timeStart": 51,
+      "timeEnd": 61,
       "text": "The overall energy and mood of the track may not fully match the casual game genre. Consider adding more playful and upbeat elements to better fit the intended context.",
       "label": "D"
     },
     {
       "id": "8628f788-93c3-4922-994a-8cd67aec4f80",
-      "timeStart": 57,
-      "timeEnd": 67,
+      "timeStart": 63,
+      "timeEnd": 74,
       "text": "The composition is engaging and aligns well with the casual game genre. However, please consider adding variation in the melody or rhythm to prevent monotony throughout the track. Additionally, ensure that the mastering does not overpower the overall mix.",
       "label": "E"
     }
@@ -354,7 +353,7 @@ export const mockComments: { [filename: string]: Comment[] } = {
     {
       "id": "f9261db5-2da8-4eb4-a72b-280dd5e2dee2",
       "timeStart": 80,
-      "timeEnd": 90,
+      "timeEnd": 110,
       "text": "The composition is well structured and harmonically rich. However, consider adding more dynamic contrasts and varying textures to create a more captivating listening experience for film and tv placements.",
       "label": "B"
     },
@@ -368,7 +367,7 @@ export const mockComments: { [filename: string]: Comment[] } = {
     {
       "id": "0ef3bd08-43cf-4645-8692-6b152278bce8",
       "timeStart": 232,
-      "timeEnd": 242,
+      "timeEnd": 262,
       "text": "The composition lacks dynamic contrast and could benefit from more varied instrumentation to create a more engaging listening experience. Consider incorporating different textures and timbres to enhance the overall emotional impact of the piece.",
       "label": "D"
     },
@@ -434,25 +433,11 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "62843277-614d-4a4b-b32c-a8e19bae06f5",
-      "timeStart": 27,
-      "timeEnd": 37,
+      "timeStart": 35,
+      "timeEnd": 56,
       "text": "The fight scene composition needs to be more dynamic and intense to better match the genre and BPM indicated in the metadata. Consider adding stronger percussion and brass elements to heighten the energy of the scene.",
       "label": "C"
     },
-    {
-      "id": "94f37429-4870-408f-be3f-5de9a3eba311",
-      "timeStart": 33,
-      "timeEnd": 43,
-      "text": "Great job on the cinematic orchestral composition for the fight scene. However, please increase the BPM to match the intensity of the scene and consider extending the duration to better support the action.",
-      "label": "D"
-    },
-    {
-      "id": "e294882e-f87b-434b-aad8-1ca604b189c9",
-      "timeStart": 38,
-      "timeEnd": 48,
-      "text": "The fight scene needs more dynamic changes to heighten the tension and excitement. Consider adding more variation in instrumentation and rhythm to create a more impactful and engaging atmosphere. Double check the mixdown to ensure all elements are balanced and clear throughout the track.",
-      "label": "E"
-    }
   ],
   "Glaxos Onedot.wav": [
     {
@@ -464,32 +449,18 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "c6d66ed0-f517-4d3f-9c72-ff5d3dff43c9",
-      "timeStart": 25,
-      "timeEnd": 35,
+      "timeStart": 42,
+      "timeEnd": 64,
       "text": "The orchestration feels a bit cluttered in some sections, consider simplifying the arrangement to allow the main theme to shine through. The strings could use a more dynamic range to add depth and emotion to the piece. Overall, the tempo and duration are fitting for a cinematic context.",
       "label": "B"
     },
     {
       "id": "ca2e8ba6-d890-4961-8851-961bf426de1e",
-      "timeStart": 44,
-      "timeEnd": 54,
+      "timeStart": 66,
+      "timeEnd": 78,
       "text": "The overall composition of \"Glaxos Onedot\" is strong, but the dynamics could be more pronounced to enhance the cinematic feel. Consider layering in some additional instrumentation to add depth to the sound. Also, ensure that the pacing aligns with the intended 92 BPM tempo for optimal synchronization with visual cues in film and TV.",
       "label": "C"
     },
-    {
-      "id": "5bfb8550-7646-438c-8c53-903f19d338d8",
-      "timeStart": 60,
-      "timeEnd": 70,
-      "text": "The composition is well-crafted for a cinematic orchestral piece, but the pacing feels a bit rushed at times. Please consider extending some sections to allow for more development and build-up.",
-      "label": "D"
-    },
-    {
-      "id": "44a56405-396f-49e9-bd34-443e54183486",
-      "timeStart": 61,
-      "timeEnd": 71,
-      "text": "The composition lacks dynamics and could benefit from more gradual build-ups and releases to create a stronger emotional impact within the cinematic context. Consider incorporating more thematic development to enhance the narrative of the piece.",
-      "label": "E"
-    }
   ],
   "Infinity F Ozone.wav": [
     {
@@ -501,8 +472,8 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "6027327f-3127-406b-8239-e1f44c44f3dc",
-      "timeStart": 28,
-      "timeEnd": 38,
+      "timeStart": 46,
+      "timeEnd": 62,
       "text": "Please add more dynamic range and variation to the composition to better fit the evolving narrative of a film or TV show. Consider incorporating different instrumentation or chord progressions to add depth and interest to the overall sound.",
       "label": "B"
     },
@@ -515,15 +486,15 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "b67f5f0c-7c3e-49ed-bbf5-3dc90584f3f8",
-      "timeStart": 147,
-      "timeEnd": 157,
+      "timeStart": 160,
+      "timeEnd": 172,
       "text": "The overall mood and atmosphere of the track are well-suited for a video game, but it lacks a strong enough melody to really stand out. Consider adding a more memorable hook to make the piece more engaging for listeners.",
       "label": "D"
     },
     {
       "id": "4cc1a193-fc22-4dde-8290-b9854f4cdfcf",
-      "timeStart": 154,
-      "timeEnd": 164,
+      "timeStart": 182,
+      "timeEnd": 211,
       "text": "The track \"Infinity\" by David Mieloch has potential, but the overall energy and instrumentation could be enhanced to better fit in the Video Game Music genre. Consider adding more dynamic elements to keep listeners engaged throughout the 3:44 duration.",
       "label": "E"
     }
@@ -545,25 +516,11 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "9318f8b0-a468-4c71-ab25-8ffe19121f6b",
-      "timeStart": 42,
-      "timeEnd": 52,
+      "timeStart": 61,
+      "timeEnd": 70,
       "text": "The BPM seems a bit fast for an intro piece, consider slowing it down for a more relaxed feel. Also, try adding some variation in the melody to keep the listener engaged throughout the piece. Good job overall!",
       "label": "C"
     },
-    {
-      "id": "4ba15066-3fab-40bb-af9d-9165ddc5dd02",
-      "timeStart": 44,
-      "timeEnd": 54,
-      "text": "The intro lacks a clear musical theme and could benefit from a stronger melodic structure to captivate the audience. Consider adding more dynamic contrast and build-up to create a more engaging opening for the film or tv show.",
-      "label": "D"
-    },
-    {
-      "id": "8816dbff-9e08-4a3f-833a-0fab6b7de45a",
-      "timeStart": 53,
-      "timeEnd": 63,
-      "text": "The intro feels a bit rushed for the mood we are trying to create. Please consider slowing down the tempo to give the scene more space to breathe.",
-      "label": "E"
-    }
   ],
   "Organica - Performed By Ann Fontanella.mp3": [
     {
@@ -589,8 +546,8 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "63beaf2c-6a88-4e92-a207-c15e383c1895",
-      "timeStart": 352,
-      "timeEnd": 362,
+      "timeStart": 332,
+      "timeEnd": 352,
       "text": "The violin solo in \"Organica\" is beautiful, but the track feels a bit long at 7:28. Please consider editing it down for better sync opportunities in film and tv.",
       "label": "D"
     },
@@ -605,8 +562,8 @@ export const mockComments: { [filename: string]: Comment[] } = {
   "Prj Oblvion Intro Demo.mp3": [
     {
       "id": "38e4396c-d41f-4a5b-b947-a6c5d0536134",
-      "timeStart": 15,
-      "timeEnd": 25,
+      "timeStart": 0,
+      "timeEnd": 15,
       "text": "The intro build-up is too abrupt and could benefit from a smoother transition into the main theme. Consider adding more dynamic layers to enhance the glitch electronic elements and maintain listener engagement throughout the track. Adjust the BPM to better match the pacing of the composition.",
       "label": "A"
     },
@@ -626,24 +583,17 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "f6d159e7-1748-4cd2-84a0-aa9907b035a2",
-      "timeStart": 45,
-      "timeEnd": 55,
+      "timeStart": 55,
+      "timeEnd": 75,
       "text": "The composition is effective in creating a glitch electronic vibe, but it could benefit from a stronger sense of direction and development throughout the track. Consider adding dynamic shifts or a more defined structure to keep the listener engaged.",
       "label": "D"
     },
-    {
-      "id": "3e8fa9d4-f660-432e-822e-5ae4a73bdf72",
-      "timeStart": 52,
-      "timeEnd": 62,
-      "text": "The composition for \"Project Oblivion Intro\" needs to create a stronger sense of atmosphere and build-up in order to better set the tone for the rest of the project. Consider incorporating more texture and dynamic shifts to enhance the overall impact of the piece. Additionally, aim for a more distinctive melodic motif to help the music stick in the audience's memory.",
-      "label": "E"
-    }
   ],
   "Virtue Itself Is Harmony.wav": [
     {
       "id": "07284433-f46b-452e-a1ce-d90cfea41a5f",
       "timeStart": 59,
-      "timeEnd": 69,
+      "timeEnd": 89,
       "text": "The composition needs to be more dynamic and varied to maintain interest over the 6:45 duration. Consider adding different instrumentation or changes in tempo to enhance the overall listening experience.",
       "label": "A"
     },
@@ -663,8 +613,8 @@ export const mockComments: { [filename: string]: Comment[] } = {
     },
     {
       "id": "4a747872-cb77-4021-bfd9-61418b246474",
-      "timeStart": 211,
-      "timeEnd": 221,
+      "timeStart": 221,
+      "timeEnd": 251,
       "text": "The track has a strong chamber ensemble sound, but the tempo feels a bit slow for the intended scene. Please consider increasing the BPM to add more energy and momentum.",
       "label": "D"
     },

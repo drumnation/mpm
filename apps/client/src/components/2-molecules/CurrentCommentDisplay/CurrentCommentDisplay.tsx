@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Paper, Text } from '@mantine/core';
+import React, { memo } from 'react';
+import { Paper, Text } from '@mantine/core';
 import { Comment } from '../../3-organisms/Player/Player.types';
 import { formatTime } from '../../../library/helpers';
 
@@ -12,16 +12,29 @@ const CurrentCommentDisplay: React.FC<CurrentCommentDisplayProps> = ({ currentTi
   const currentComment = comments.find(comment => currentTime >= comment.timeStart && currentTime <= comment.timeEnd);
 
   return (
-    <Paper shadow='xs' withBorder style={{ padding: '20px', marginLeft: 20, marginRight: 20, textAlign: 'center' }}>
+    <Paper shadow='xs' withBorder style={{ padding: 20, textAlign: 'center' }}>
       {currentComment ? (
         <>
-          <Text style={{ fontSize: '24px', fontWeight: 'bold' }}>
-            <span style={{ color: 'blue' }}>{currentComment.label}</span>
-            <span style={{ fontWeight: 'normal' }}>
-              {` (${formatTime(currentComment.timeStart)} - ${formatTime(currentComment.timeEnd)})`}
+          <Text style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: 15, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 40,
+              height: 40,
+              borderRadius: '50%',
+              backgroundColor: 'blue',
+              color: 'white',
+              fontSize: '16px',
+              marginRight: 10
+            }}>
+              {currentComment.label}
             </span>
+            <Text style={{ fontWeight: 'normal' }}>
+              {` (${formatTime(currentComment.timeStart)} → ${formatTime(currentComment.timeEnd)})`}
+            </Text>
           </Text>
-          <Text style={{ fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic' }}>
+          <Text style={{ fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}>
             "{currentComment.text}"
           </Text>
         </>
@@ -34,4 +47,4 @@ const CurrentCommentDisplay: React.FC<CurrentCommentDisplayProps> = ({ currentTi
   );
 };
 
-export default CurrentCommentDisplay;
+export default memo(CurrentCommentDisplay);

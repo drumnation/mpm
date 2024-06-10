@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useContext, ReactNode } from 'react';
-import { Comment } from '../components/3-organisms/Player/Player.types';
+import { Comment } from '../../components/3-organisms/Player/Player.types';
 
 interface Track {
   filename: string;
@@ -18,7 +18,7 @@ interface Track {
   duration: string;
 }
 
-interface TrackState {
+export interface TrackState {
   selectedTrack: Track | null;
   comments: Comment[];
   currentTime: number;
@@ -26,8 +26,8 @@ interface TrackState {
   seekTime: number | null;
 }
 
-interface TrackAction {
-  type: 'SET_SELECTED_TRACK' | 'CLEAR_SELECTED_TRACK' | 'SET_COMMENTS' | 'SET_CURRENT_TIME' | 'SET_DURATION' | 'SET_SEEK_TIME' | 'UPDATE_TRACK_METADATA';
+export interface TrackAction {
+  type: 'SET_SELECTED_TRACK' | 'CLEAR_SELECTED_TRACK' | 'SET_COMMENTS' | 'SET_CURRENT_TIME' | 'SET_DURATION' | 'SET_SEEK_TIME' | 'UPDATE_TRACK_METADATA' | 'DELETE_COMMENT' | 'EDIT_COMMENT';
   payload?: any;
 }
 
@@ -86,6 +86,24 @@ const trackReducer = (state: TrackState, action: TrackAction): TrackState => {
           ...state.selectedTrack,
           ...action.payload,
         } as Track,
+      };
+      case 'DELETE_COMMENT':
+      return {
+        ...state,
+        comments: state.comments.filter(comment => comment.id !== action.payload),
+      };
+    case 'EDIT_COMMENT':
+      return {
+        ...state,
+        comments: state.comments.map(comment => {
+          if (comment.id === action.payload.id) {
+            return {
+              ...comment,
+              text: action.payload.text,
+            };
+          }
+          return comment;
+        }),
       };
     default:
       return state;

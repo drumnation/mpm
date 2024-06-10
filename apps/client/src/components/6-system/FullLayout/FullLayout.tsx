@@ -1,11 +1,10 @@
 import { AppShell, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleCaretLeft, IconCircleCaretRight } from '@tabler/icons-react';
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useState, memo } from 'react';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import styled from 'styled-components';
-import { useMiddleArea } from '../../../contexts';
 
 interface FullLayoutProps {
   header: ReactNode;
@@ -49,11 +48,10 @@ const CustomHandleAside = styled(CustomHandle)`
 
 const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }) => {
   const [opened, { toggle }] = useDisclosure();
-  const [navbarWidth, setNavbarWidth] = useState<number>(300);
-  const [asideWidth, setAsideWidth] = useState<number>(300);
+  const [navbarWidth, setNavbarWidth] = useState<number>(570);
+  const [asideWidth, setAsideWidth] = useState<number>(570);
   const [isNavbarMinimized, setNavbarMinimized] = useState<boolean>(false);
   const [isAsideMinimized, setAsideMinimized] = useState<boolean>(false);
-  const { middleAreaRef } = useMiddleArea();
 
   const MIN_COLUMN_WIDTH = 100;
   const MAX_COLUMN_WIDTH = 600;
@@ -94,7 +92,7 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
             </div>
           </div>
         </ResizableBoxStyled>
-        <div ref={middleAreaRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
           <AppShell.Main style={{ flex: 1, overflowY: 'auto' }}>
             {main}
           </AppShell.Main>
@@ -128,4 +126,4 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
   );
 };
 
-export default FullLayout;
+export default memo(FullLayout);

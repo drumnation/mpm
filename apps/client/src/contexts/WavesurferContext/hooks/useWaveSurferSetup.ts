@@ -1,21 +1,29 @@
 import { useWavesurfer } from '@wavesurfer/react';
-import { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Minimap from 'wavesurfer.js/dist/plugins/minimap.esm.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js';
 import Timeline from 'wavesurfer.js/dist/plugins/timeline.esm.js';
-import { useTrack } from '../../../../contexts';
+import { useTrack } from '../..';
 
 export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
   const { state, dispatch } = useTrack();
 
   const regionsPluginRef = useRef<RegionsPlugin | null>(null);
+  const isInitialized = useRef(false);
+  const [isReady, setIsReady] = useState(false);
 
-  const { wavesurfer, isReady, isPlaying } = useWavesurfer({
+  const plugins = useMemo(() => [
+    Timeline.create(),
+    Minimap.create({ height: 30, waveColor: '#ddd', progressColor: '#999' }),
+    RegionsPlugin.create()
+  ], []);
+
+  const { wavesurfer, isPlaying } = useWavesurfer({
     autoScroll: true,
     barRadius: 3,
     barWidth: 3,
     container: wavesurferRef,
-    cursorColor: '#4353FF',
+    cursorColor: '#000',
     dragToSeek: true,
     fillParent: true,
     interact: true,
@@ -23,21 +31,24 @@ export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
     hideScrollbar: true,
     minPxPerSec: 100,
     normalize: true,
-    plugins: useMemo(() => [Timeline.create(), Minimap.create({ height: 30, waveColor: '#ddd', progressColor: '#999' })], []),
+    plugins,
     progressColor: '#4353FF',
     url: state.selectedTrack?.filename,
     waveColor: '#D9DCFF',
   });
 
-  const handleSeek = useCallback((time: number) => {
-    if (wavesurfer) {
-      if (time === 0) {
-        wavesurfer.seekTo(0);
-      } else {
-        wavesurfer.seekTo(time / state.duration);
+  const handleSeek = useCallback(
+    (time: number) => {
+      if (wavesurfer) {
+        if (time === 0) {
+          wavesurfer.seekTo(0);
+        } else {
+          wavesurfer.seekTo(time / state.duration);
+        }
       }
-    }
-  }, [wavesurfer, state.duration]);
+    },
+    [wavesurfer, state.duration]
+  );
 
   useEffect(() => {
     if (state.seekTime !== null) {
@@ -47,20 +58,31 @@ export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
   }, [state.seekTime, handleSeek, dispatch]);
 
   useEffect(() => {
-    if (!wavesurfer) return;
+    if (!wavesurfer || isInitialized.current) return;
 
-    const wsRegions = RegionsPlugin.create();
-    wavesurfer.registerPlugin(wsRegions);
-    regionsPluginRef.current = wsRegions;
-    console.log('Regions plugin registered');
-  }, [wavesurfer]);
+    const wsRegions = plugins.find(plugin => plugin instanceof RegionsPlugin);
+    if (wsRegions) {
+      regionsPluginRef.current = wsRegions;
+    }
+
+    isInitialized.current = true;
+  }, [wavesurfer, plugins]);
 
   useEffect(() => {
     if (wavesurfer) {
       wavesurfer.on('audioprocess', () => dispatch({ type: 'SET_CURRENT_TIME', payload: wavesurfer.getCurrentTime() }));
-      wavesurfer.on('ready', () => dispatch({ type: 'SET_DURATION', payload: wavesurfer.getDuration() }));
+      wavesurfer.on('ready', () => {
+        dispatch({ type: 'SET_DURATION', payload: wavesurfer.getDuration() });
+        setIsReady(true);
+      });
     }
   }, [wavesurfer, dispatch]);
+
+  useEffect(() => {
+    if (state.selectedTrack?.filename) {
+      setIsReady(false);
+    }
+  }, [state.selectedTrack?.filename]);
 
   const handlePlayPause = useCallback(() => {
     if (wavesurfer) {
@@ -84,6 +106,13 @@ export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      const isInputField = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+
+      if (isInputField) {
+        return;
+      }
+
       if (event.code === 'Space') {
         event.preventDefault();
         handlePlayPause();

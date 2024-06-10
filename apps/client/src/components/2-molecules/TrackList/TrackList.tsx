@@ -1,10 +1,9 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect, FC, memo, useCallback } from 'react';
 import { useReactTable, ColumnDef, getCoreRowModel, getSortedRowModel, flexRender } from '@tanstack/react-table';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Table, Container, Text, Badge } from '@mantine/core';
-import { TrackMetadata } from '../../5-pages/MusicReviewDashboard/DummyMusicData';
-import { FC } from 'react';
+import { TrackMetadata } from '../../../library/DummyMusicData';
 import { useTrack } from '../../../contexts';
 import { DraggableHeader } from '../../1-atoms';
 import { IconSortAscendingLetters, IconSortDescendingLetters } from '@tabler/icons-react';
@@ -24,6 +23,7 @@ const generateRandomColor = () => {
 
 const TrackList: FC<TrackListProps> = ({ tracks }) => {
   const { dispatch } = useTrack();
+
   const [selectedTrack, setSelectedTrack] = useState<TrackMetadata | null>(null);
   const genreColorMap = useRef<Record<string, string>>({});
 
@@ -62,7 +62,7 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  const handleSelectTrack = (track: TrackMetadata) => {
+  const handleSelectTrack = useCallback((track: TrackMetadata) => {
     if (selectedTrack?.filename === track.filename) {
       setSelectedTrack(null);
       dispatch({ type: 'CLEAR_SELECTED_TRACK' });
@@ -70,7 +70,13 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
       setSelectedTrack(track);
       dispatch({ type: 'SET_SELECTED_TRACK', payload: track });
     }
-  };
+  }, [dispatch, selectedTrack]);
+
+  useEffect(() => {
+    if (selectedTrack === null && tracks.length > 0) {
+      handleSelectTrack(tracks[0]);
+    }
+  }, [selectedTrack, handleSelectTrack, tracks]);
 
   const moveColumn = (dragIndex: number, hoverIndex: number) => {
     const updatedColumns = [...columns];
@@ -89,7 +95,7 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
             <Table.Thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <Table.Tr key={headerGroup.id}>
-                  <Table.Th style={{ textAlign: 'center' }}>#</Table.Th> {/* Add a header for the row number */}
+                  <Table.Th style={{ textAlign: 'center' }}>#</Table.Th>
                   {headerGroup.headers.map((header, index) => (
                     <DraggableHeader
                       key={header.id}
@@ -109,8 +115,12 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {header.column.getCanSort() && (
                           <>
-                            {header.column.getIsSorted() === 'asc' && <IconSortAscendingLetters style={{ marginLeft: 4 }} />}
-                            {header.column.getIsSorted() === 'desc' && <IconSortDescendingLetters style={{ marginLeft: 4 }} />}
+                            {header.column.getIsSorted() === 'asc' && (
+                              <IconSortAscendingLetters style={{ marginLeft: 4 }} />
+                            )}
+                            {header.column.getIsSorted() === 'desc' && (
+                              <IconSortDescendingLetters style={{ marginLeft: 4 }} />
+                            )}
                           </>
                         )}
                       </div>
@@ -123,11 +133,15 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
               {table.getRowModel().rows.map((row, i) => {
                 const isSelected = selectedTrack?.filename === row.original.filename;
                 return (
-                  <Table.Tr
+                  <tr
                     key={row.id}
                     onClick={() => handleSelectTrack(row.original)}
                     style={{
-                      backgroundColor: isSelected ? '#d0ebff' : i % 2 === 0 ? '#f5f5f5' : '#ffffff',
+                      backgroundColor: isSelected
+                        ? '#d0ebff'
+                        : i % 2 === 0
+                        ? '#f5f5f5'
+                        : '#ffffff',
                       cursor: 'pointer',
                       textAlign: 'center',
                       padding: '10px 0',
@@ -139,7 +153,7 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </Table.Td>
                     ))}
-                  </Table.Tr>
+                  </tr>
                 );
               })}
             </Table.Tbody>
@@ -150,4 +164,4 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
   );
 };
 
-export default TrackList;
+export default memo(TrackList);

@@ -1,8 +1,7 @@
 import { Box, Loader, Paper, Slider, Text } from '@mantine/core';
 import { IconPlayerPause, IconPlayerPlay, IconPlayerSkipBack, IconPlayerSkipForward } from '@tabler/icons-react';
 import WaveSurfer from 'wavesurfer.js';
-import { FC } from 'react';
-import { VolumeControl } from './components';
+import { FC, memo } from 'react';
 
 interface AudioControlsProps {
   currentTime: number;
@@ -67,4 +66,4 @@ const AudioControls: FC<AudioControlsProps> = ({
   );
 };
 
-export default AudioControls;
+export default memo(AudioControls);

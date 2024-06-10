@@ -1,135 +1,263 @@
-import React, { ChangeEvent } from 'react';
-import { Box, TextInput, Title } from '@mantine/core';
+import React, { ChangeEvent, useCallback, useReducer, useEffect, memo } from 'react';
+import { Box, TextInput } from '@mantine/core';
 import { useTrack } from '../../../contexts';
+import { handleKeyDownPreventSpecificKeys } from '../../../library/helpers';
+import debounce from 'lodash/debounce';
+
+type Track = {
+  album: string;
+  albumArtist: string;
+  artistName: string;
+  bpm: string;
+  comment: string;
+  composer: string;
+  discNumber: string;
+  duration: string;
+  filename: string;
+  fileType: string;
+  genre: string;
+  trackName: string;
+  trackNumber: string;
+  year: string;
+};
+
+type TrackField = keyof Track;
+
+const TrackMetadataInput = React.memo(({
+  label,
+  description,
+  field,
+  value,
+  required,
+  withAsterisk,
+  handleInputChange,
+  handleKeyDown,
+}: {
+  label: string;
+  description: string;
+  field: keyof Track;
+  value: string;
+  required?: boolean;
+  withAsterisk?: boolean;
+  handleInputChange: (field: keyof Track) => (event: ChangeEvent<HTMLInputElement>) => void;
+  handleKeyDown: React.KeyboardEventHandler<HTMLInputElement>;
+}) => (
+  <TextInput
+    description={description}
+    label={label}
+    mt='xs'
+    onKeyDown={handleKeyDown}
+    onChange={handleInputChange(field)}
+    required={required}
+    value={value}
+    withAsterisk={withAsterisk}
+  />
+));
+
+const trackReducer = (state: Track, action: { type: 'UPDATE_FIELD'; field: TrackField; value: string }): Track => {
+  switch (action.type) {
+    case 'UPDATE_FIELD':
+      return { ...state, [action.field]: action.value };
+    default:
+      return state;
+  }
+};
+
+const defaultTrack: Track = {
+  album: '',
+  albumArtist: '',
+  artistName: '',
+  bpm: '',
+  comment: '',
+  composer: '',
+  discNumber: '',
+  duration: '',
+  filename: '',
+  fileType: '',
+  genre: '',
+  trackName: '',
+  trackNumber: '',
+  year: '',
+};
 
 const TrackMetadataForm: React.FC = () => {
-  const { state, dispatch } = useTrack();
-  const { selectedTrack } = state;
+  const { state: trackState, dispatch: trackDispatch } = useTrack();
+  const { selectedTrack } = trackState as { selectedTrack: Track | null };
+
+  const [formState, formDispatch] = useReducer(trackReducer, selectedTrack || defaultTrack);
+
+  const handleInputChange = useCallback((field: keyof Track) => (event: ChangeEvent<HTMLInputElement>) => {
+    formDispatch({
+      type: 'UPDATE_FIELD',
+      field,
+      value: event.target.value,
+    });
+  }, []);
+
+  useEffect(() => {
+    const debouncedDispatch = debounce((updatedState: Track) => {
+      trackDispatch({
+        type: 'UPDATE_TRACK_METADATA',
+        payload: updatedState,
+      });
+    }, 500);
+
+    debouncedDispatch(formState);
+
+    return () => {
+      debouncedDispatch.cancel();
+    };
+  }, [formState, trackDispatch]);
+
+  useEffect(() => {
+    if (selectedTrack) {
+      formDispatch({ type: 'UPDATE_FIELD', field: 'album', value: selectedTrack.album });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'albumArtist', value: selectedTrack.albumArtist });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'artistName', value: selectedTrack.artistName });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'bpm', value: selectedTrack.bpm });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'comment', value: selectedTrack.comment });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'composer', value: selectedTrack.composer });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'discNumber', value: selectedTrack.discNumber });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'duration', value: selectedTrack.duration });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'filename', value: selectedTrack.filename });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'fileType', value: selectedTrack.fileType });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'genre', value: selectedTrack.genre });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'trackName', value: selectedTrack.trackName });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'trackNumber', value: selectedTrack.trackNumber });
+      formDispatch({ type: 'UPDATE_FIELD', field: 'year', value: selectedTrack.year });
+    }
+  }, [selectedTrack]);
 
   if (!selectedTrack) {
     return <Box ta='center' mt='md'>No track selected</Box>;
   }
 
-  const handleInputChange = (field: string) => (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: 'UPDATE_TRACK_METADATA',
-      payload: { [field]: event.target.value },
-    });
-  };
-
   return (
     <Box p='xs'>
-      <div style={{ marginBottom: '.5rem' }} />
-      <TextInput
-        description="The album this track belongs to."
+      <TrackMetadataInput
         label="Album"
-        mt='xs'
-        onChange={handleInputChange('album')}
-        required
-        value={selectedTrack.album}
-        withAsterisk
+        description="The album this track belongs to."
+        field="album"
+        value={formState.album}
+        required={true}
+        withAsterisk={true}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The primary artist for the album."
+      <TrackMetadataInput
         label="Album Artist"
-        mt='xs'
-        onChange={handleInputChange('albumArtist')}
-        required
-        value={selectedTrack.albumArtist}
-        withAsterisk
+        description="The primary artist for the album."
+        field="albumArtist"
+        value={formState.albumArtist}
+        required={true}
+        withAsterisk={true}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The name of the artist who performed the track."
+      <TrackMetadataInput
         label="Artist Name"
-        mt='xs'
-        onChange={handleInputChange('artistName')}
-        required
-        value={selectedTrack.artistName}
-        withAsterisk
+        description="The name of the artist who performed the track."
+        field="artistName"
+        value={formState.artistName}
+        required={true}
+        withAsterisk={true}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="Beats per minute of the track."
+      <TrackMetadataInput
         label="BPM"
-        mt='xs'
-        onChange={handleInputChange('bpm')}
-        value={selectedTrack.bpm}
+        description="Beats per minute of the track."
+        field="bpm"
+        value={formState.bpm}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="Any additional comments about the track."
+      <TrackMetadataInput
         label="Comment"
-        mt='xs'
-        onChange={handleInputChange('comment')}
-        value={selectedTrack.comment}
+        description="Any additional comments about the track."
+        field="comment"
+        value={formState.comment}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The person who composed the track."
+      <TrackMetadataInput
         label="Composer"
-        mt='xs'
-        onChange={handleInputChange('composer')}
-        value={selectedTrack.composer}
+        description="The person who composed the track."
+        field="composer"
+        value={formState.composer}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The disc number if part of a multi-disc album."
+      <TrackMetadataInput
         label="Disc Number"
-        mt='xs'
-        onChange={handleInputChange('discNumber')}
-        value={selectedTrack.discNumber}
+        description="The disc number if part of a multi-disc album."
+        field="discNumber"
+        value={formState.discNumber}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The duration of the track in seconds."
+      <TrackMetadataInput
         label="Duration"
-        mt='xs'
-        onChange={handleInputChange('duration')}
-        value={selectedTrack.duration}
+        description="The duration of the track in seconds."
+        field="duration"
+        value={formState.duration}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The file name of the track."
+      <TrackMetadataInput
         label="Filename"
-        mt='xs'
-        onChange={handleInputChange('filename')}
-        required
-        value={selectedTrack.filename}
-        withAsterisk
+        description="The file name of the track."
+        field="filename"
+        value={formState.filename}
+        required={true}
+        withAsterisk={true}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The file type of the track (e.g., MP3, WAV)."
+      <TrackMetadataInput
         label="File Type"
-        mt='xs'
-        onChange={handleInputChange('fileType')}
-        value={selectedTrack.fileType}
+        description="The file type of the track (e.g., MP3, WAV)."
+        field="fileType"
+        value={formState.fileType}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The genre of the track."
+      <TrackMetadataInput
         label="Genre"
-        mt='xs'
-        onChange={handleInputChange('genre')}
-        value={selectedTrack.genre}
+        description="The genre of the track."
+        field="genre"
+        value={formState.genre}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The name of the track."
+      <TrackMetadataInput
         label="Track Name"
-        mt='xs'
-        onChange={handleInputChange('trackName')}
-        required
-        value={selectedTrack.trackName}
-        withAsterisk
+        description="The name of the track."
+        field="trackName"
+        value={formState.trackName}
+        required={true}
+        withAsterisk={true}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The track number on the album."
+      <TrackMetadataInput
         label="Track Number"
-        mt='xs'
-        onChange={handleInputChange('trackNumber')}
-        value={selectedTrack.trackNumber}
+        description="The track number on the album."
+        field="trackNumber"
+        value={formState.trackNumber}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
-      <TextInput
-        description="The year the track was released."
+      <TrackMetadataInput
         label="Year"
-        mt='xs'
-        onChange={handleInputChange('year')}
-        value={selectedTrack.year}
+        description="The year the track was released."
+        field="year"
+        value={formState.year}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDownPreventSpecificKeys}
       />
     </Box>
   );
 };
 
-export default TrackMetadataForm;
+export default memo(TrackMetadataForm);

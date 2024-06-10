@@ -9414,7 +9414,7 @@ snapshots:
       tsconfig-paths-webpack-plugin: 4.0.0
       tslib: 2.6.3
       webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.91.0)
+      webpack-dev-server: 4.15.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.91.0))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4))
       webpack-node-externals: 3.0.0
       webpack-subresource-integrity: 5.1.0(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4))
     transitivePeerDependencies:
@@ -9484,7 +9484,7 @@ snapshots:
       webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)
     optionalDependencies:
       type-fest: 4.20.0
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.91.0)
+      webpack-dev-server: 4.15.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.91.0))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4))
 
   '@polka/url@1.0.0-next.25': {}
 
@@ -10300,7 +10300,7 @@ snapshots:
       webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.91.0)
     optionalDependencies:
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.91.0)
+      webpack-dev-server: 4.15.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.91.0))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4))
 
   '@xmldom/xmldom@0.8.10': {}
 
@@ -15884,7 +15884,7 @@ snapshots:
       webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)
       webpack-merge: 5.10.0
     optionalDependencies:
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.91.0)
+      webpack-dev-server: 4.15.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.91.0))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4))
 
   webpack-dev-middleware@5.3.4(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)):
     dependencies:
@@ -15895,7 +15895,7 @@ snapshots:
       schema-utils: 4.2.0
       webpack: 5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)
 
-  webpack-dev-server@4.15.2(webpack-cli@5.1.4)(webpack@5.91.0):
+  webpack-dev-server@4.15.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.91.0))(webpack@5.91.0(@swc/core@1.5.25(@swc/helpers@0.5.11))(webpack-cli@5.1.4)):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4

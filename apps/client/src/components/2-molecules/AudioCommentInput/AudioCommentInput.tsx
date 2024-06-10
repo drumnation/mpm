@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Textarea, Box, Paper } from '@mantine/core';
+import { Button, Paper, Textarea } from '@mantine/core';
+import React, { memo, useState } from 'react';
+import { handleKeyDownPreventSpecificKeys } from '../../../library/helpers';
 
 interface AudioCommentInputProps {
   onAddComment: (timeStart: number, timeEnd: number, text: string) => void;
@@ -8,6 +9,7 @@ interface AudioCommentInputProps {
 
 const AudioCommentInput: React.FC<AudioCommentInputProps> = ({ onAddComment, currentTime }) => {
   const [comment, setComment] = useState('');
+
 
   const handleAddComment = () => {
     if (comment.trim()) {
@@ -22,6 +24,7 @@ const AudioCommentInput: React.FC<AudioCommentInputProps> = ({ onAddComment, cur
         placeholder="Leave a comment"
         value={comment}
         onChange={(e) => setComment(e.currentTarget.value)}
+        onKeyDown={handleKeyDownPreventSpecificKeys}
         rows={3}
         style={{ padding: 35, flexGrow: 1 }}
       />
@@ -32,4 +35,4 @@ const AudioCommentInput: React.FC<AudioCommentInputProps> = ({ onAddComment, cur
   );
 };
 
-export default AudioCommentInput;
+export default memo(AudioCommentInput);
