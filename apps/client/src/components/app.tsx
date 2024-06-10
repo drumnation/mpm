@@ -16,8 +16,8 @@ const App: FC = () => {
     <MantineProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/" element={<h1>Welcome 👋 <a href='/music-review-dashboard'>continue to dashboard demo</a></h1>} />
-          <Route path="/music-review-dashboard" element={<MusicReviewDashboard />} />
+          <Route path="/" element={<MusicReviewDashboard />} />
+          {/* <Route path="/music-review-dashboard" element={<MusicReviewDashboard />} /> */}
           {/* <Route path="/dashboard1" element={<Dashboard1 />} />
             <Route path="/dashboard2" element={<Dashboard2 />} /> */}
         </Routes>
