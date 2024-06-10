@@ -6,6 +6,7 @@ import path from 'path';
 
 export default defineConfig({
   root: __dirname,
+  base: '/',
   optimizeDeps: {
     include: ['tslib'],
   },
