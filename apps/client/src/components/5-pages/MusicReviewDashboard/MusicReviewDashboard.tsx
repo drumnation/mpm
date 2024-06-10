@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { TrackProvider, WavesurferProvider } from '../../../contexts';
 import Player from '../../3-organisms/Player/Player';
-import { AsideComponent, HeaderComponent, NavbarComponent } from '../../4-templates/MusicReviewDashboard/MusicReviewDashboard';
+import { AsideComponent, HeaderComponent, NavbarComponent } from '../../4-templates';
 import { FullLayout } from '../../6-system';
 
 const MusicReviewDashboard: React.FC = () => {

@@ -1,1 +1,1 @@
-export * from './MusicReviewDashboard';
+export * from './MusicReviewDashboard/MusicReviewDashboard';
