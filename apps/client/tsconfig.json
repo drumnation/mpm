@@ -3,15 +3,26 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
+    "module": "Preserve",
+    "target": "ES2015",
     "esModuleInterop": false,
+    "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
     "strict": true,
     "baseUrl": ".",
     "paths": {
       "@mpm/*": ["src/*"]
-    },
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.*/**/*.ts",
+    "src/**/*.*/**/*.tsx"
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

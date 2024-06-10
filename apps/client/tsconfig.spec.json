@@ -3,15 +3,18 @@
   "compilerOptions": {
     "composite": true,
     "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
+    "module": "preserve",
     "types": [
       "jest",
       "node",
       "@nx/react/typings/cssmodule.d.ts",
-      "@nx/react/typings/image.d.ts",
+      "@nx/react/typings/image.d.ts"
     ]
   },
-  "files": ["src/app/app.tsx", "src/app/nx-welcome.tsx"],
+  "files": [
+    "src/components/app.tsx",
+    "src/components/nx-welcome.tsx"
+  ],
   "include": [
     "jest.config.ts",
     "src/**/*.test.ts",
@@ -26,6 +29,10 @@
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "src/**/*.*/**/*.ts",
+    "src/**/*.*/**/*.tsx",
+    "src/**/*.*/**/*.js",
+    "src/**/*.*/**/*.jsx"
   ]
 }

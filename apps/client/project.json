@@ -22,7 +22,8 @@
       "executor": "@nx/vite:dev-server",
       "options": {
         "buildTarget": "client:build",
-        "port": 4200
+        "port": 4200,
+        "proxyConfig": "apps/client/proxy.conf.json"
       }
     },
     "lint": {

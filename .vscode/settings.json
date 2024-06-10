@@ -1,0 +1,14 @@
+{
+  "cssVariables.lookupFiles": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.less",
+    "../node_modules/@mantine/core/styles.css"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#3D2734",
+    "titleBar.activeBackground": "#563649",
+    "titleBar.activeForeground": "#FCFAFB"
+  }
+}

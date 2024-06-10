@@ -1,10 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -45,10 +42,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": [
-        "apps/client-e2e/**/*",
-        "apps/server-e2e/**/*"
-      ]
+      "exclude": ["apps/client-e2e/**/*", "apps/server-e2e/**/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -76,5 +70,6 @@
       }
     }
   },
-  "nxCloudAccessToken": "MTRjOWUzZWUtYmJhYy00NWY1LWE1ZDYtOGNlM2EwYTNkNDlifHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MTRjOWUzZWUtYmJhYy00NWY1LWE1ZDYtOGNlM2EwYTNkNDlifHJlYWQtd3JpdGU=",
+  "defaultProject": "electron-client"
 }
