@@ -1,13 +1,13 @@
+
+import { useTrack } from '@/contexts/TrackContext/TrackContext.js';
 import { useWavesurfer } from '@wavesurfer/react';
 import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Minimap from 'wavesurfer.js/dist/plugins/minimap.esm.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js';
 import Timeline from 'wavesurfer.js/dist/plugins/timeline.esm.js';
-import { useTrack } from '../..';
 
 export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
   const { state, dispatch } = useTrack();
-
   const regionsPluginRef = useRef<RegionsPlugin | null>(null);
   const isInitialized = useRef(false);
   const [isReady, setIsReady] = useState(false);
@@ -60,7 +60,8 @@ export const useWavesurferSetup = (wavesurferRef: RefObject<HTMLElement>) => {
   useEffect(() => {
     if (!wavesurfer || isInitialized.current) return;
 
-    const wsRegions = plugins.find(plugin => plugin instanceof RegionsPlugin);
+    const wsRegions = plugins.find((plugin): plugin is RegionsPlugin => plugin instanceof RegionsPlugin);
+
     if (wsRegions) {
       regionsPluginRef.current = wsRegions;
     }

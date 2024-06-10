@@ -5,7 +5,7 @@
 import { app } from 'electron';
 import { spawn } from 'child_process';
 import { resolve, join, basename } from 'path';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.js';
 
 export default class SquirrelEvents {
   private static isAppFirstRun = false;

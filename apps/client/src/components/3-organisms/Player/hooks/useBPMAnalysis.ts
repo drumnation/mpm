@@ -1,4 +1,5 @@
-import { useTrack } from '../../../../contexts';
+
+import { useTrack } from '@contexts/TrackContext/TrackContext.js';
 import { useCallback, useEffect, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { analyze } from 'web-audio-beat-detector';
@@ -17,7 +18,6 @@ export const useBPMAnalysis = (wavesurfer: WaveSurfer | null) => {
     setAudioContext(context);
   }, []);
 
-  // @ts-expect-error - Not sure how to fix
   const analyzeBPM = useCallback(async () => {
     if (!state.selectedTrack?.filename) {
       console.error('No file selected');

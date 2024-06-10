@@ -1,18 +1,43 @@
 {
-  "extends": ["plugin:@nx/react", "../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
-  "rules": {},
+  "extends": [
+    "plugin:@nx/react",
+    "../../.eslintrc.json",
+    "prettier"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 80
+      }
+    ],
+    "prettier/prettier": "error"
+  },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
       "rules": {}
     }
   ]

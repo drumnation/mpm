@@ -1,1 +1,1 @@
-export * from './MusicReviewDashboard/MusicReviewDashboard';
+export * from './MusicReviewDashboard/MusicReviewDashboard.jsx';

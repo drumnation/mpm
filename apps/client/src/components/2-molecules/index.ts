@@ -1,8 +1,8 @@
-import AudioCommentDisplay from "./AudioCommentDisplay/AudioCommentDisplay";
-import AudioCommentInput from "./AudioCommentInput/AudioCommentInput";
-import IframeLoader from "./IframeLoader/IframeLoader";
-import TrackList from "./TrackList/TrackList";
-import CurrentCommentDisplay from "./CurrentCommentDisplay/CurrentCommentDisplay";
-import TrackMetadataForm from "./TrackMetadataForm/TrackMetadataForm";
+import AudioCommentDisplay from "./AudioCommentDisplay/AudioCommentDisplay.js";
+import AudioCommentInput from "./AudioCommentInput/AudioCommentInput.js";
+import IframeLoader from "./IframeLoader/IframeLoader.js";
+import TrackList from "./TrackList/TrackList.js";
+import CurrentCommentDisplay from "./CurrentCommentDisplay/CurrentCommentDisplay.js";
+import TrackMetadataForm from "./TrackMetadataForm/TrackMetadataForm.js";
 
 export { AudioCommentDisplay, AudioCommentInput, CurrentCommentDisplay, IframeLoader, TrackList, TrackMetadataForm };

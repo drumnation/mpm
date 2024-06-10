@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Container, Alert } from '@mantine/core';
-import styled from 'styled-components';
 
 interface IframeLoaderProps {
   initialUrl?: string;
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 16px;
-  margin-top: 16px;
-  width: 1400px;
-`;
-
-const StyledTextInput = styled(TextInput)`
-  flex: 1;
-  min-width: 1000px;
-  border-radius: 8px;
-`;
 
 const IframeLoader: React.FC<IframeLoaderProps> = ({ initialUrl = '' }) => {
   const [url, setUrl] = useState<string>(initialUrl);
@@ -49,16 +34,17 @@ const IframeLoader: React.FC<IframeLoaderProps> = ({ initialUrl = '' }) => {
 
   return (
     <Container>
-      <Wrapper>
-        <StyledTextInput
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: '16px', marginTop: '16px', width: '1400px' }}>
+        <TextInput
           value={inputUrl}
           onChange={handleInputChange}
           placeholder="Enter a web address"
           label="URL"
           withAsterisk
+          style={{ flex: 1, minWidth: '1000px', borderRadius: '8px' }}
         />
         <Button onClick={handleLoadUrl}>Load URL</Button>
-      </Wrapper>
+      </div>
       {error && (
         <Alert title="Error" color="red" mt="md">
           {error}

@@ -4,6 +4,18 @@
     "composite": true,
     "declaration": true,
     "outDir": "../../dist/out-tsc",
+    "moduleResolution": "NodeNext",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ]
+    },
     "types": [
       "node",
       "@nx/react/typings/cssmodule.d.ts",
@@ -21,7 +33,13 @@
     "src/**/*.spec.js",
     "src/**/*.test.js",
     "src/**/*.spec.jsx",
-    "src/**/*.test.jsx"
+    "src/**/*.test.jsx",
+    "src/**/index.ts"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

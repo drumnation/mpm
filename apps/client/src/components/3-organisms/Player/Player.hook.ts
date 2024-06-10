@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useTrack, useWavesurfer } from '../../../contexts';
-import { useBPMAnalysis, useEventHandlers, useZoom } from './hooks';
+import { useBPMAnalysis } from '@components/3-organisms/Player/hooks/useBPMAnalysis.js';
+import { useEventHandlers } from '@components/3-organisms/Player/hooks/useEventHandlers.js';
+import { useZoom } from '@components/3-organisms/Player/hooks/useZoom.js';
+import { useTrack } from '@contexts/TrackContext/TrackContext.js';
+import { useWavesurfer } from '@contexts/WavesurferContext/WavesurferContext.js';
+
 
 const usePlayer = () => {
   const {
@@ -23,28 +26,6 @@ const usePlayer = () => {
 
   useEventHandlers(wavesurfer, regionsPluginRef, handleTimeUpdate, handleRegionUpdate);
 
-  // const [zoomLevel, setZoomLevel] = useState(100);
-
-  // useEffect(() => {
-  //   const setZoom = () => {
-  //     if (wavesurfer && isReady) {
-  //       wavesurfer.zoom(zoomLevel);
-  //     }
-  //   };
-
-  //   if (wavesurfer) {
-  //     wavesurfer.on('ready', setZoom);
-  //     if (isReady) {
-  //       setZoom();
-  //     }
-  //   }
-
-  //   return () => {
-  //     if (wavesurfer) {
-  //       wavesurfer.un('ready', setZoom);
-  //     }
-  //   };
-  // }, [zoomLevel, wavesurfer, isReady]);
   const { setZoomLevel, zoomLevel, waveformContainerRef } = useZoom(wavesurfer, isReady);
 
   return {

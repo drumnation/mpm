@@ -1,7 +1,7 @@
 import { app, autoUpdater, dialog, MessageBoxOptions } from 'electron';
 import { platform, arch } from 'os';
-import { updateServerUrl } from '../constants';
-import App from '../app';
+import { updateServerUrl } from '../constants.js';
+import App from '../app.js';
 
 export default class UpdateEvents {
   // initialize auto update service - most be invoked only in production

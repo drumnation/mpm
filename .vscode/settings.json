@@ -9,6 +9,21 @@
   "workbench.colorCustomizations": {
     "activityBar.background": "#3D2734",
     "titleBar.activeBackground": "#563649",
-    "titleBar.activeForeground": "#FCFAFB"
-  }
+    "titleBar.activeForeground": "#FCFAFB",
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "files.autoSave": "onFocusChange",
+  "vs-code-prettier-eslint.prettierLast": false,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
 }

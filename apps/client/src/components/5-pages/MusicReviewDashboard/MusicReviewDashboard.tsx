@@ -1,21 +1,23 @@
+import { TrackProvider } from '@/contexts/TrackContext/TrackContext.js';
+import { WavesurferProvider } from '@/contexts/WavesurferContext/WavesurferContext.js';
+import Player from '@components/3-organisms/Player/Player.js';
+import { AsideComponent, HeaderComponent, NavbarComponent } from '@components/4-templates/MusicReviewDashboard/MusicReviewDashboard.js';
+import FullLayout from '@components/6-system/FullLayout/FullLayout.js';
+
 import React, { memo } from 'react';
-import { TrackProvider, WavesurferProvider } from '../../../contexts';
-import Player from '../../3-organisms/Player/Player';
-import { AsideComponent, HeaderComponent, NavbarComponent } from '../../4-templates';
-import { FullLayout } from '../../6-system';
 
 const MusicReviewDashboard: React.FC = () => {
   return (
     <TrackProvider>
-        <WavesurferProvider>
-          <FullLayout
-            header={<HeaderComponent />}
-            navbar={<NavbarComponent />}
-            main={<Player />}
-            aside={<AsideComponent />}
-            footer={null}
-          />
-        </WavesurferProvider>
+      <WavesurferProvider>
+        <FullLayout
+          header={<HeaderComponent />}
+          navbar={<NavbarComponent />}
+          main={<Player />}
+          aside={<AsideComponent />}
+          footer={null}
+        />
+      </WavesurferProvider>
     </TrackProvider>);
 };
 

@@ -1,9 +1,10 @@
+
+import { mockComments } from "@/library/DummyMusicData.js";
+import { regenerateLetters } from "@/library/helpers.js";
 import { useRef, useCallback, useEffect } from "react";
-import { regenerateLetters } from "../../../library/helpers";
-import { TrackAction, TrackState } from "../..";
+import { Comment } from "@components/3-organisms/Player/Player.types.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
-import { Comment } from "../../../components/3-organisms/Player/Player.types";
-import { mockComments } from "../../../library/DummyMusicData";
+import { TrackAction, TrackState } from "@/contexts/TrackContext/TrackContext.js";
 
 export const useSeedComments = (dispatch: React.Dispatch<TrackAction>, regionsPluginRef: React.MutableRefObject<RegionsPlugin | null>, state: TrackState, isReady: boolean) => {
   const commentsSeededRef = useRef(false);

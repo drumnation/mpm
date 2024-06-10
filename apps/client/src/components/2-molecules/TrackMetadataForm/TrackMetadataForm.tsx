@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useCallback, useReducer, useEffect, memo } from 'react';
 import { Box, TextInput } from '@mantine/core';
-import { useTrack } from '../../../contexts';
-import { handleKeyDownPreventSpecificKeys } from '../../../library/helpers';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash/debounce.js';
+
+import { handleKeyDownPreventSpecificKeys } from '@/library/helpers.js';
+import { useTrack } from '@/contexts/TrackContext/TrackContext.js';
 
 type Track = {
   album: string;

@@ -45,23 +45,23 @@ const AudioControls: FC<AudioControlsProps> = ({
         </Box>
       </Paper>
       {duration !== 0 && originalBpm ? (
-          <Paper shadow="xs" p="xl" style={{ textAlign: 'center' }} withBorder>
-            <Slider
-              color="blue"
-              marks={[
-                { value: originalBpm - 60, label: `${originalBpm - 60} BPM` },
-                { value: originalBpm, label: `${originalBpm} BPM` },
-                { value: originalBpm + 60, label: `${originalBpm + 60} BPM` },
-              ]}
-              defaultValue={originalBpm}
-              min={originalBpm - 60}
-              max={originalBpm + 60}
-              step={1}
-              value={relativeBpm || originalBpm}
-              onChange={handleBpmChange}
-            />
-          </Paper>
-      ): <Paper shadow="xs" p={!loadingBPM ? 'xl' :'md'} style={{ textAlign: 'center' }} withBorder>{loadingBPM && <Loader />}</Paper>}
+        <Paper shadow="xs" p="xl" style={{ textAlign: 'center' }} withBorder>
+          <Slider
+            color="blue"
+            marks={[
+              { value: originalBpm - 60, label: `${originalBpm - 60} BPM` },
+              { value: originalBpm, label: `${originalBpm} BPM` },
+              { value: originalBpm + 60, label: `${originalBpm + 60} BPM` },
+            ]}
+            defaultValue={originalBpm}
+            min={originalBpm - 60}
+            max={originalBpm + 60}
+            step={1}
+            value={relativeBpm || originalBpm}
+            onChange={handleBpmChange}
+          />
+        </Paper>
+      ) : <Paper shadow="xs" p={!loadingBPM ? 'xl' : 'md'} style={{ textAlign: 'center' }} withBorder>{loadingBPM && <Loader />}</Paper>}
     </Paper>
   );
 };

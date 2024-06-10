@@ -1,4 +1,4 @@
-import { Comment } from '../components/3-organisms/Player/Player.types';
+import { Comment } from '@components/3-organisms/Player/Player.types.js';
 
 export const formatTime = (time: number) => {
   const minutes = Math.floor(time / 60);

@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
 import { Paper, Text } from '@mantine/core';
-import { Comment } from '../../3-organisms/Player/Player.types';
-import { formatTime } from '../../../library/helpers';
-
+import { Comment } from '@components/3-organisms/Player/Player.types.js';
+import { formatTime } from '@/library/helpers.js';
 interface CurrentCommentDisplayProps {
   currentTime: number;
   comments: Comment[];

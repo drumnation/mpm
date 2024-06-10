@@ -1,8 +1,10 @@
+import { useTrack } from '@/contexts/TrackContext/TrackContext.js';
+import { useWavesurfer } from '@/contexts/WavesurferContext/WavesurferContext.js';
+import { formatTime, handleKeyDownPreventSpecificKeys } from '@/library/helpers.js';
 import { ScrollArea, Table, Text, Textarea } from '@mantine/core';
 import { IconCircleCheck, IconEdit, IconSquareX, IconTrash } from '@tabler/icons-react';
 import React, { useState, memo } from 'react';
-import { useTrack, useWavesurfer } from '../../../contexts';
-import { formatTime, handleKeyDownPreventSpecificKeys } from '../../../library/helpers';
+
 
 const AudioCommentDisplay: React.FC = () => {
   const { handleDeleteComment, handleEditComment } = useWavesurfer();
@@ -46,23 +48,23 @@ const AudioCommentDisplay: React.FC = () => {
       }}
       onClick={() => onSeek(comment.timeStart)}
     >
-<Table.Td style={{ padding: 30, fontWeight: 700, position: 'relative' }}>
-      <div style={{
-        width: 30,
-        height: 30,
-        borderRadius: '50%',
-        backgroundColor: '#e0e0e0',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-      }}>
-        {comment.label}
-      </div>
-    </Table.Td>
+      <Table.Td style={{ padding: 30, fontWeight: 700, position: 'relative' }}>
+        <div style={{
+          width: 30,
+          height: 30,
+          borderRadius: '50%',
+          backgroundColor: '#e0e0e0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)'
+        }}>
+          {comment.label}
+        </div>
+      </Table.Td>
       <Table.Td style={{ padding: 5, width: 110 }}>{`(${formatTime(comment.timeStart)} → ${formatTime(comment.timeEnd)})`}</Table.Td>
       <Table.Td style={{ padding: 10 }}>
         {editingCommentId === comment.id ? (
@@ -80,8 +82,8 @@ const AudioCommentDisplay: React.FC = () => {
       <Table.Td style={{ padding: 10 }}>
         {editingCommentId === comment.id ? (
           <>
-              <IconSquareX color='red' onClick={onCancelEditComment}/>
-              <IconCircleCheck color='green' onClick={onSaveEditComment} />
+            <IconSquareX color='red' onClick={onCancelEditComment} />
+            <IconCircleCheck color='green' onClick={onSaveEditComment} />
           </>
         ) : (
           <>

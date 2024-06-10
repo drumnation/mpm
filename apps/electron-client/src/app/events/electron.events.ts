@@ -4,7 +4,7 @@
  */
 
 import { app, ipcMain } from 'electron';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.js';
 
 export default class ElectronEvents {
   static bootstrapElectronEvents(): Electron.IpcMain {

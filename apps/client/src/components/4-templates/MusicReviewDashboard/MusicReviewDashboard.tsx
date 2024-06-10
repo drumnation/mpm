@@ -1,9 +1,14 @@
+
+
+import UserMenu from '@components/3-organisms/UserMenu/UserMenu.js';
+
+import { tracks } from '@/library/DummyMusicData.js';
 import { Box, Tabs } from '@mantine/core';
 import React, { memo } from 'react';
-import { tracks } from '../../../library/DummyMusicData';
-import Logo from '../../1-atoms/Logo/Logo';
-import { AudioCommentDisplay, TrackList, TrackMetadataForm } from '../../2-molecules';
-import UserMenu from '../../3-organisms/UserMenu/UserMenu';
+import TrackList from '@/components/2-molecules/TrackList/TrackList.js';
+import AudioCommentDisplay from '@/components/2-molecules/AudioCommentDisplay/AudioCommentDisplay.js';
+import TrackMetadataForm from '@/components/2-molecules/TrackMetadataForm/TrackMetadataForm.js';
+import Logo from '@components/1-atoms/Logo/Logo.js';
 
 export const HeaderComponent: React.FC = () => {
   const userName = 'David Mieloch';
@@ -26,9 +31,6 @@ export const HeaderComponent: React.FC = () => {
     </Box>
   );
 };
-
-export default HeaderComponent;
-
 
 export const NavbarComponent: React.FC = memo(() => (
   <Box mt='xs'>

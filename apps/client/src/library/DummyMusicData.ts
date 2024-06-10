@@ -211,7 +211,6 @@ export interface Comment {
   label: string;
 }
 
-// @ts-expect-error - Not sure how to fix this error
 async function generateComments(track: TrackMetadata): Promise<Comment[]> {
   const durationInSeconds = convertDurationToSeconds(track.duration);
   const numberOfComments = Math.min(Math.floor(durationInSeconds / 10), 5); // Generate up to 5 comments per track

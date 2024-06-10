@@ -1,10 +1,11 @@
 import React, { createContext, useCallback, useContext, useRef } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin, { Region } from 'wavesurfer.js/dist/plugins/regions.js';
-import { isString, regenerateLetters } from '../../library/helpers';
-import { useTrack } from '../TrackContext/TrackContext';
-import { useWavesurferSetup } from './hooks/useWaveSurferSetup';
-import { useSeedComments } from './hooks/useSeedComments';
+
+import { useSeedComments } from './hooks/useSeedComments.js';
+import { isString, regenerateLetters } from '@/library/helpers.js';
+import { useWavesurferSetup } from './hooks/useWaveSurferSetup.js';
+import { useTrack } from '@/contexts/TrackContext/TrackContext.js';
 
 interface WavesurferContextValue {
   currentTime: number;

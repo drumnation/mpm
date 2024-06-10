@@ -1,3 +1,3 @@
-import FullLayout from "./FullLayout/FullLayout";
+import FullLayout from "./FullLayout/FullLayout.js";
 
 export { FullLayout };

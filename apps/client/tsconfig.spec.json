@@ -3,13 +3,29 @@
   "compilerOptions": {
     "composite": true,
     "outDir": "../../dist/out-tsc",
-    "module": "preserve",
+    "module": "NodeNext",
     "types": [
       "jest",
       "node",
       "@nx/react/typings/cssmodule.d.ts",
-      "@nx/react/typings/image.d.ts"
-    ]
+      "@nx/react/typings/image.d.ts",
+      "../../node_modules/tslib/tslib.d.ts",
+      "../../node_modules/@types/styled-components/index.d.ts",
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "tslib": [
+        "../../node_modules/tslib/tslib.d.ts"
+      ],
+    }
   },
   "files": [
     "src/components/app.tsx",
@@ -33,6 +49,7 @@
     "src/**/*.*/**/*.ts",
     "src/**/*.*/**/*.tsx",
     "src/**/*.*/**/*.js",
-    "src/**/*.*/**/*.jsx"
+    "src/**/*.*/**/*.jsx",
+    "src/**/index.ts"
   ]
 }

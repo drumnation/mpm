@@ -3,25 +3,50 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
-    "module": "Preserve",
-    "target": "ES2015",
-    "esModuleInterop": false,
-    "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": false,
     "importHelpers": true,
-    "strict": true,
-    "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "paths": {
-      "@mpm/*": ["src/*"]
-    }
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "tslib": [
+        "../../node_modules/tslib/tslib.d.ts"
+      ],
+      "*": [
+        "types/*"
+      ],
+    },
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
   },
   "include": [
+    "src/**/*",
+    "types/**/*",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx",
     "src/**/*.*/**/*.ts",
-    "src/**/*.*/**/*.tsx"
+    "src/**/*.*/**/*.tsx",
+    "src/**/index.ts",
+    "src/components/1-atoms/index.ts",
+    "src/components/2-molecules/index.ts",
+    "src/components/3-organisms/index.ts",
+    "src/components/4-templates/index.ts",
+    "src/components/5-pages/index.ts",
+    "src/components/6-system/index.ts",
+    "src/contexts/index.ts"
   ],
   "references": [
     {

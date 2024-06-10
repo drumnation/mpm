@@ -1,4 +1,5 @@
-import { TrackMetadata } from '@mpm/library/DummyMusicData';
+
+import { TrackMetadata } from '@/library/DummyMusicData.js';
 import { Header } from '@tanstack/react-table';
 import React, { FC, memo } from 'react';
 import { useDrag, useDrop } from 'react-dnd';

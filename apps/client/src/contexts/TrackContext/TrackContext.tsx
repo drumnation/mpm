@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useContext, ReactNode } from 'react';
-import { Comment } from '../../components/3-organisms/Player/Player.types';
+import { Comment } from '@components/3-organisms/Player/Player.types.js';
 
 interface Track {
   filename: string;
@@ -87,7 +87,7 @@ const trackReducer = (state: TrackState, action: TrackAction): TrackState => {
           ...action.payload,
         } as Track,
       };
-      case 'DELETE_COMMENT':
+    case 'DELETE_COMMENT':
       return {
         ...state,
         comments: state.comments.filter(comment => comment.id !== action.payload),

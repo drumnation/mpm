@@ -1,8 +1,13 @@
+
+import AudioCommentInput from '@/components/2-molecules/AudioCommentInput/AudioCommentInput.js';
+import CurrentCommentDisplay from '@/components/2-molecules/CurrentCommentDisplay/CurrentCommentDisplay.js';
+import AudioControls from '@components/3-organisms/Player/components/AudioControls/AudioControls.js';
+import Waveform from '@components/3-organisms/Player/components/Waveform/Waveform.js';
+import ZoomControls from '@components/3-organisms/Player/components/ZoomControls/ZoomControls.js';
+
+import usePlayer from '@components/3-organisms/Player/Player.hook.js';
 import { Badge, Box, Paper, Text } from '@mantine/core';
 import React, { memo } from 'react';
-import { AudioCommentInput, CurrentCommentDisplay } from '../../2-molecules';
-import usePlayer from './Player.hook';
-import { AudioControls, Waveform, ZoomControls } from './components';
 
 const Player: React.FC = () => {
   const {

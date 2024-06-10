@@ -1,6 +1,6 @@
+import { handleKeyDownPreventSpecificKeys } from '@/library/helpers.js';
 import { Button, Paper, Textarea } from '@mantine/core';
 import React, { memo, useState } from 'react';
-import { handleKeyDownPreventSpecificKeys } from '../../../library/helpers';
 
 interface AudioCommentInputProps {
   onAddComment: (timeStart: number, timeEnd: number, text: string) => void;

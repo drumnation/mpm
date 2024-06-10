@@ -1,2 +1,2 @@
-export * from './TrackContext/TrackContext';
-export * from './WavesurferContext/WavesurferContext'
+export * from './TrackContext/TrackContext.js';
+export * from './WavesurferContext/WavesurferContext.js';

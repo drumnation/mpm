@@ -1,4 +1,4 @@
-export * from './useBPMAnalysis';
-export * from './useEventHandlers';
-export * from './useZoom';
-export * from '../../../../contexts/WavesurferContext/hooks/useSeedComments';
+export * from './useBPMAnalysis.js';
+export * from './useEventHandlers.js';
+export * from './useZoom.js';
+

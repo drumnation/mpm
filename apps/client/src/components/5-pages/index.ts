@@ -1,3 +1,3 @@
-import MusicReviewDashboard from './MusicReviewDashboard/MusicReviewDashboard';
+import MusicReviewDashboard from './MusicReviewDashboard/MusicReviewDashboard.js';
 
 export { MusicReviewDashboard };

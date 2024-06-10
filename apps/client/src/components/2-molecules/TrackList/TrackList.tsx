@@ -3,10 +3,11 @@ import { useReactTable, ColumnDef, getCoreRowModel, getSortedRowModel, flexRende
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Table, Container, Text, Badge } from '@mantine/core';
-import { TrackMetadata } from '../../../library/DummyMusicData';
-import { useTrack } from '../../../contexts';
-import { DraggableHeader } from '../../1-atoms';
+
 import { IconSortAscendingLetters, IconSortDescendingLetters } from '@tabler/icons-react';
+import { TrackMetadata } from '@/library/DummyMusicData.js';
+import DraggableHeader from '@components/1-atoms/DraggableHeader/DraggableHeader.js';
+import { useTrack } from '@contexts/TrackContext/TrackContext.js';
 
 interface TrackListProps {
   tracks: TrackMetadata[];
@@ -140,8 +141,8 @@ const TrackList: FC<TrackListProps> = ({ tracks }) => {
                       backgroundColor: isSelected
                         ? '#d0ebff'
                         : i % 2 === 0
-                        ? '#f5f5f5'
-                        : '#ffffff',
+                          ? '#f5f5f5'
+                          : '#ffffff',
                       cursor: 'pointer',
                       textAlign: 'center',
                       padding: '10px 0',

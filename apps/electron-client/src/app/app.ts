@@ -1,6 +1,6 @@
 import { BrowserWindow, shell, screen } from 'electron';
-import { rendererAppName, rendererAppPort } from './constants';
-import { environment } from '../environments/environment';
+import { rendererAppName, rendererAppPort } from './constants.js';
+import { environment } from '../environments/environment.js';
 import { join } from 'path';
 import { format } from 'url';
 

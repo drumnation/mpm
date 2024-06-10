@@ -1,8 +1,9 @@
-import SquirrelEvents from './app/events/squirrel.events';
-import ElectronEvents from './app/events/electron.events';
-import UpdateEvents from './app/events/update.events';
+import SquirrelEvents from 'apps/electron-client/src/app/events/squirrel.events.js';
+import ElectronEvents from 'apps/electron-client/src/app/events/electron.events.js';
+import UpdateEvents from 'apps/electron-client/src/app/events/update.events.js';
+
 import { app, BrowserWindow } from 'electron';
-import App from './app/app';
+import App from './app/app.js';
 
 export default class Main {
   static initialize() {

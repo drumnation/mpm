@@ -1,10 +1,9 @@
 import { AppShell, Burger, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleCaretLeft, IconCircleCaretRight } from '@tabler/icons-react';
-import { FC, ReactNode, useState, memo } from 'react';
+import { FC, ReactNode, useState, memo, SetStateAction } from 'react';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
-import styled from 'styled-components';
 
 interface FullLayoutProps {
   header: ReactNode;
@@ -13,38 +12,6 @@ interface FullLayoutProps {
   aside: ReactNode;
   footer: ReactNode;
 }
-
-const ResizableContainer = styled.div`
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-`;
-
-const ResizableBoxStyled = styled(ResizableBox)`
-  position: relative;
-  height: 100%;
-  border: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-`;
-
-const CustomHandle = styled.span`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: #ccc;
-  cursor: ew-resize;
-  z-index: 1;
-`;
-
-const CustomHandleNavbar = styled(CustomHandle)`
-  right: 0;
-`;
-
-const CustomHandleAside = styled(CustomHandle)`
-  left: 0;
-`;
 
 const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }) => {
   const [opened, { toggle }] = useDisclosure();
@@ -71,57 +38,93 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
           {header}
         </Group>
       </AppShell.Header>
-      <ResizableContainer>
-        <ResizableBoxStyled
+      <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+        <ResizableBox
           width={isNavbarMinimized ? 40 : navbarWidth}
           height={Infinity}
           axis="x"
           minConstraints={[MIN_COLUMN_WIDTH, Infinity]}
           maxConstraints={[MAX_COLUMN_WIDTH, Infinity]}
-          onResize={(e, data) => setNavbarWidth(data.size.width)}
-          handle={<CustomHandleNavbar />}
+          onResize={(e: any, data: { size: { width: SetStateAction<number> } }) => setNavbarWidth(data.size.width)}
+          handle={
+            <span
+              style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                width: '2px',
+                backgroundColor: '#ccc',
+                cursor: 'ew-resize',
+                zIndex: 1,
+                right: 0,
+              }}
+            />
+          }
+          style={{
+            position: 'relative',
+            height: '100%',
+            border: '1px solid #ccc',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: 5, marginTop: 62 }}>
-              {isNavbarMinimized ?
+              {isNavbarMinimized ? (
                 <IconCircleCaretRight onClick={() => setNavbarMinimized(!isNavbarMinimized)} />
-                : <IconCircleCaretLeft onClick={() => setNavbarMinimized(!isNavbarMinimized)} />}
+              ) : (
+                <IconCircleCaretLeft onClick={() => setNavbarMinimized(!isNavbarMinimized)} />
+              )}
             </div>
-            <div style={{ overflowY: 'auto', flexGrow: 1 }}>
-              {!isNavbarMinimized && navbar}
-            </div>
+            <div style={{ overflowY: 'auto', flexGrow: 1 }}>{!isNavbarMinimized && navbar}</div>
           </div>
-        </ResizableBoxStyled>
+        </ResizableBox>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-          <AppShell.Main style={{ flex: 1, overflowY: 'auto' }}>
-            {main}
-          </AppShell.Main>
-          {footer && <AppShell.Footer p="md">
-            {footer}
-          </AppShell.Footer>}
+          <AppShell.Main style={{ flex: 1, overflowY: 'auto' }}>{main}</AppShell.Main>
+          {footer && <AppShell.Footer p="md">{footer}</AppShell.Footer>}
         </div>
-        <ResizableBoxStyled
+        <ResizableBox
           width={isAsideMinimized ? 40 : asideWidth}
           height={Infinity}
           axis="x"
           minConstraints={[MIN_COLUMN_WIDTH, Infinity]}
           maxConstraints={[MAX_COLUMN_WIDTH, Infinity]}
-          onResize={(e, data) => setAsideWidth(data.size.width)}
-          handle={<CustomHandleAside />}
+          onResize={(_e: any, data: { size: { width: SetStateAction<number> } }) => setAsideWidth(data.size.width)}
+          handle={
+            <span
+              style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                width: '2px',
+                backgroundColor: '#ccc',
+                cursor: 'ew-resize',
+                zIndex: 1,
+                left: 0,
+              }}
+            />
+          }
           resizeHandles={['w']}
+          style={{
+            position: 'relative',
+            height: '100%',
+            border: '1px solid #ccc',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginTop: 62, display: 'flex', justifyContent: 'flex-start', marginLeft: 5 }}>
-              {isAsideMinimized ?
+              {isAsideMinimized ? (
                 <IconCircleCaretLeft onClick={() => setAsideMinimized(!isAsideMinimized)} />
-                : <IconCircleCaretRight onClick={() => setAsideMinimized(!isAsideMinimized)} />}
+              ) : (
+                <IconCircleCaretRight onClick={() => setAsideMinimized(!isAsideMinimized)} />
+              )}
             </div>
-            <div style={{ overflowY: 'auto', flexGrow: 1 }}>
-              {!isAsideMinimized && aside}
-            </div>
+            <div style={{ overflowY: 'auto', flexGrow: 1 }}>{!isAsideMinimized && aside}</div>
           </div>
-        </ResizableBoxStyled>
-      </ResizableContainer>
+        </ResizableBox>
+      </div>
     </AppShell>
   );
 };
