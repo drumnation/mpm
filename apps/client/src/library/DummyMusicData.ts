@@ -198,7 +198,7 @@ export const tracks: TrackMetadata[] = [
 ];
 
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: 'xxxxx-xxxxxxxxx-xxxxx-xxxxx-xxxxx',
   dangerouslyAllowBrowser: true,
 });
 
