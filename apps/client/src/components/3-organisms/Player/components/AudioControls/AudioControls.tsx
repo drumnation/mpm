@@ -27,8 +27,6 @@ const AudioControls: FC<AudioControlsProps> = ({
   relativeBpm,
   wavesurfer,
 }) => {
-  console.log('AudioControls render', { loadingBPM, originalBpm, relativeBpm });
-
   return (
     <Paper shadow="xs" p="xl" withBorder>
       <Paper shadow="xs" p="xs" mb='xs' withBorder>
