@@ -39,7 +39,7 @@ const CurrentCommentDisplay: React.FC<CurrentCommentDisplayProps> = ({ currentTi
         </>
       ) : (
         <Text style={{ fontSize: '24px', fontWeight: 'bold' }}>
-          No comment for the current time
+          No comments available at the current time.
         </Text>
       )}
     </Paper>

@@ -1,10 +1,9 @@
 import { useTrack } from '@/contexts/TrackContext/TrackContext.js';
 import { useWavesurfer } from '@/contexts/WavesurferContext/WavesurferContext.js';
 import { formatTime, handleKeyDownPreventSpecificKeys } from '@/library/helpers.js';
-import { ScrollArea, Table, Text, Textarea } from '@mantine/core';
+import { ScrollArea, Table, Text, Textarea, Tooltip } from '@mantine/core';
 import { IconCircleCheck, IconEdit, IconSquareX, IconTrash } from '@tabler/icons-react';
 import React, { useState, memo } from 'react';
-
 
 const AudioCommentDisplay: React.FC = () => {
   const { handleDeleteComment, handleEditComment } = useWavesurfer();
@@ -82,13 +81,21 @@ const AudioCommentDisplay: React.FC = () => {
       <Table.Td style={{ padding: 10 }}>
         {editingCommentId === comment.id ? (
           <>
-            <IconSquareX color='red' onClick={onCancelEditComment} />
-            <IconCircleCheck color='green' onClick={onSaveEditComment} />
+            <Tooltip label="Cancel" withArrow position="top">
+              <IconSquareX color='red' onClick={onCancelEditComment} style={{ cursor: 'pointer' }} />
+            </Tooltip>
+            <Tooltip label="Confirm" withArrow position="top">
+              <IconCircleCheck color='green' onClick={onSaveEditComment} style={{ cursor: 'pointer' }} />
+            </Tooltip>
           </>
         ) : (
           <>
-            <IconEdit color='blue' onClick={() => onStartEditComment(comment.id, comment.text)} style={{ cursor: 'pointer' }} />
-            <IconTrash color="red" onClick={() => onDeleteComment(comment.id)} style={{ cursor: 'pointer' }} />
+            <Tooltip label="Edit" withArrow position="top">
+              <IconEdit color='blue' onClick={() => onStartEditComment(comment.id, comment.text)} style={{ cursor: 'pointer' }} />
+            </Tooltip>
+            <Tooltip label="Delete" withArrow position="top">
+              <IconTrash color="red" onClick={() => onDeleteComment(comment.id)} style={{ cursor: 'pointer' }} />
+            </Tooltip>
           </>
         )}
       </Table.Td>

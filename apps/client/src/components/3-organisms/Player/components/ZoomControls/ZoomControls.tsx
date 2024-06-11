@@ -1,4 +1,4 @@
-import { Box, Slider } from '@mantine/core';
+import { Box, Slider, Tooltip } from '@mantine/core';
 import { IconZoomIn, IconZoomOut } from '@tabler/icons-react';
 import React, { memo } from 'react';
 
@@ -9,13 +9,30 @@ interface ZoomControlsProps {
 
 const ZoomControls: React.FC<ZoomControlsProps> = ({ zoomLevel, setZoomLevel }) => {
   const handleZoomChange = (value: number) => {
-    setZoomLevel(value);
+    if (value >= 0 && value <= 300) {
+      setZoomLevel(value);
+    }
   };
+
+  const handleZoomOut = () => {
+    if (zoomLevel > 0) {
+      handleZoomChange(zoomLevel - 10);
+    }
+  };
+
+  const handleZoomIn = () => {
+    if (zoomLevel < 300) {
+      handleZoomChange(zoomLevel + 10);
+    }
+  };
+
   const valueLabelFormat = `${zoomLevel}%`;
 
   return (
     <Box style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '250px', marginRight: 20 }}>
-      <IconZoomOut onClick={() => handleZoomChange(zoomLevel - 10)} style={{ cursor: 'pointer' }} />
+      <Tooltip label="Zoom Out" withArrow position="top">
+        <IconZoomOut onClick={handleZoomOut} style={{ cursor: zoomLevel > 0 ? 'pointer' : 'not-allowed' }} />
+      </Tooltip>
       <Slider
         value={zoomLevel}
         onChange={handleZoomChange}
@@ -34,7 +51,9 @@ const ZoomControls: React.FC<ZoomControlsProps> = ({ zoomLevel, setZoomLevel }) 
         label={valueLabelFormat}
         style={{ flex: 1 }}
       />
-      <IconZoomIn onClick={() => handleZoomChange(zoomLevel + 10)} style={{ cursor: 'pointer' }} />
+      <Tooltip label="Zoom In" withArrow position="top">
+        <IconZoomIn onClick={handleZoomIn} style={{ cursor: zoomLevel < 300 ? 'pointer' : 'not-allowed' }} />
+      </Tooltip>
     </Box>
   );
 };

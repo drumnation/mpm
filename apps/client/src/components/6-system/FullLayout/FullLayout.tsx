@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group } from '@mantine/core';
+import { AppShell, Burger, Group, Tooltip } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleCaretLeft, IconCircleCaretRight } from '@tabler/icons-react';
 import { FC, ReactNode, useState, memo, SetStateAction } from 'react';
@@ -19,9 +19,21 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
   const [asideWidth, setAsideWidth] = useState<number>(570);
   const [isNavbarMinimized, setNavbarMinimized] = useState<boolean>(false);
   const [isAsideMinimized, setAsideMinimized] = useState<boolean>(false);
+  const [navbarTooltipOpened, setNavbarTooltipOpened] = useState<boolean>(false);
+  const [asideTooltipOpened, setAsideTooltipOpened] = useState<boolean>(false);
 
   const MIN_COLUMN_WIDTH = 100;
   const MAX_COLUMN_WIDTH = 600;
+
+  const handleNavbarMinimize = () => {
+    setNavbarMinimized(!isNavbarMinimized);
+    setNavbarTooltipOpened(false);
+  };
+
+  const handleAsideMinimize = () => {
+    setAsideMinimized(!isAsideMinimized);
+    setAsideTooltipOpened(false);
+  };
 
   return (
     <AppShell
@@ -71,9 +83,21 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: 5, marginTop: 62 }}>
               {isNavbarMinimized ? (
-                <IconCircleCaretRight onClick={() => setNavbarMinimized(!isNavbarMinimized)} />
+                <Tooltip label="Expand" position="right" withArrow opened={navbarTooltipOpened}>
+                  <IconCircleCaretRight
+                    onClick={handleNavbarMinimize}
+                    onMouseEnter={() => setNavbarTooltipOpened(true)}
+                    onMouseLeave={() => setNavbarTooltipOpened(false)}
+                  />
+                </Tooltip>
               ) : (
-                <IconCircleCaretLeft onClick={() => setNavbarMinimized(!isNavbarMinimized)} />
+                <Tooltip label="Minimize" position="right" withArrow opened={navbarTooltipOpened}>
+                  <IconCircleCaretLeft
+                    onClick={handleNavbarMinimize}
+                    onMouseEnter={() => setNavbarTooltipOpened(true)}
+                    onMouseLeave={() => setNavbarTooltipOpened(false)}
+                  />
+                </Tooltip>
               )}
             </div>
             <div style={{ overflowY: 'auto', flexGrow: 1 }}>{!isNavbarMinimized && navbar}</div>
@@ -116,9 +140,21 @@ const FullLayout: FC<FullLayoutProps> = ({ header, navbar, main, aside, footer }
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginTop: 62, display: 'flex', justifyContent: 'flex-start', marginLeft: 5 }}>
               {isAsideMinimized ? (
-                <IconCircleCaretLeft onClick={() => setAsideMinimized(!isAsideMinimized)} />
+                <Tooltip label="Expand" position="right" withArrow opened={asideTooltipOpened}>
+                  <IconCircleCaretLeft
+                    onClick={handleAsideMinimize}
+                    onMouseEnter={() => setAsideTooltipOpened(true)}
+                    onMouseLeave={() => setAsideTooltipOpened(false)}
+                  />
+                </Tooltip>
               ) : (
-                <IconCircleCaretRight onClick={() => setAsideMinimized(!isAsideMinimized)} />
+                <Tooltip label="Minimize" position="right" withArrow opened={asideTooltipOpened}>
+                  <IconCircleCaretRight
+                    onClick={handleAsideMinimize}
+                    onMouseEnter={() => setAsideTooltipOpened(true)}
+                    onMouseLeave={() => setAsideTooltipOpened(false)}
+                  />
+                </Tooltip>
               )}
             </div>
             <div style={{ overflowY: 'auto', flexGrow: 1 }}>{!isAsideMinimized && aside}</div>

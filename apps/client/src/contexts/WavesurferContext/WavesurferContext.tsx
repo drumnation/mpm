@@ -6,11 +6,13 @@ import { useSeedComments } from './hooks/useSeedComments.js';
 import { isString, regenerateLetters } from '@/library/helpers.js';
 import { useWavesurferSetup } from './hooks/useWaveSurferSetup.js';
 import { useTrack } from '@/contexts/TrackContext/TrackContext.js';
+import { useBPMAnalysis } from '@/contexts/WavesurferContext/hooks/useBPMAnalysis.js';
 
 interface WavesurferContextValue {
   currentTime: number;
   duration: number;
   handleAddComment: (timeStart: number, timeEnd: number, text: string, id?: string) => void;
+  handleBpmChange: (newRelativeBpm: number) => void;
   handleDeleteComment: (commentId: string) => void;
   handleEditComment: (commentId: string, newText: string) => void;
   handleRegionUpdate: (region: Region) => void;
@@ -18,7 +20,10 @@ interface WavesurferContextValue {
   handleTimeUpdate: (time: number) => void;
   isPlaying: boolean;
   isReady: boolean;
+  loadingBPM: boolean;
+  originalBpm: number | null;
   regionsPluginRef: React.MutableRefObject<RegionsPlugin | null>;
+  relativeBpm: number | null;
   setCurrentTime: (time: number) => void;
   wavesurfer: WaveSurfer | null;
   wavesurferRef: React.RefObject<HTMLDivElement>;
@@ -28,6 +33,7 @@ const WavesurferContext = createContext<WavesurferContextValue>({
   currentTime: 0,
   duration: 0,
   handleAddComment: (timeStart: number, timeEnd: number, text: string, id?: string) => console.warn('handleAddComment method not implemented', timeStart, timeEnd, text, id),
+  handleBpmChange: (newRelativeBpm: number) => console.warn('handleBpmChange method not implemented', newRelativeBpm),
   handleDeleteComment: (commentId: string) => console.warn('handleDeleteComment method not implemented', commentId),
   handleEditComment: (commentId: string, newText: string) => console.warn('handleEditComment method not implemented', commentId, newText),
   handleRegionUpdate: (region: Region) => console.warn('handleRegionUpdate method not implemented', region),
@@ -35,7 +41,10 @@ const WavesurferContext = createContext<WavesurferContextValue>({
   handleTimeUpdate: (time: number) => console.warn('handleTimeUpdate method not implemented', time),
   isPlaying: false,
   isReady: false,
+  loadingBPM: false,
+  originalBpm: null,
   regionsPluginRef: { current: null },
+  relativeBpm: null,
   setCurrentTime: (time: number) => console.warn('setCurrentTime method not implemented', time),
   wavesurfer: null,
   wavesurferRef: { current: null },
@@ -46,6 +55,8 @@ export const WavesurferProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const { state, dispatch } = useTrack();
 
   const { currentTime, duration, wavesurfer, setCurrentTime, regionsPluginRef, isPlaying, isReady, handleSeek } = useWavesurferSetup(wavesurferRef);
+
+  const { handleBpmChange, loading: loadingBPM, originalBpm, relativeBpm } = useBPMAnalysis(wavesurfer);
 
   useSeedComments(dispatch, regionsPluginRef, state, isReady);
 
@@ -177,6 +188,10 @@ export const WavesurferProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         handleTimeUpdate,
         handleSeek,
         isPlaying,
+        handleBpmChange,
+        loadingBPM,
+        originalBpm,
+        relativeBpm,
         isReady,
         regionsPluginRef,
         setCurrentTime,

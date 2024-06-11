@@ -29,7 +29,6 @@
   },
   "files": [
     "src/components/app.tsx",
-    "src/components/nx-welcome.tsx"
   ],
   "include": [
     "jest.config.ts",
